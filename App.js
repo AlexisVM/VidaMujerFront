@@ -132,7 +132,7 @@ const HomeSideNavigation = createDrawerNavigator({
 const AppStack = createStackNavigator({
   Home: HomeSideNavigation,
   Social: SocialTopNavigator,
-  Profile: ProfileScreen,
+  Perfil: ProfileScreen,
 });
 
 export default createAppContainer(

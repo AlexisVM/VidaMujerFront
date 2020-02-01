@@ -110,7 +110,7 @@ export default class HomeScreen extends Component {
   }
 
   _profile = () => {
-    this.props.navigation.navigate('Profile');
+    this.props.navigation.navigate('Perfil');
   };
 
   _makeReport = () => {
