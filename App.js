@@ -16,7 +16,6 @@ import ConfigScreen from './screens/configuration/config.js';
 import MyCoursesScreen from './screens/courses/myCourses.js';
 import LoginScreen from './screens/auth/login.js';
 import AuthLoadingScreen from './screens/auth/authLoading.js';
-import Images from './screens/social/fullImages.js';
 
 
 const AuthStack = createStackNavigator({
@@ -108,7 +107,7 @@ const HomeSideNavigation = createDrawerNavigator({
       )
     }
   },
-  
+
 
 
 },{
