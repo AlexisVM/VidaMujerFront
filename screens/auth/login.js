@@ -39,14 +39,17 @@ export default class LoginScreen extends Component {
 
   render() {
     return (
-        <View style={styles.containerView}>
-          <ScrollView style={styles.loginBackground}>
+
+          <ImageBackground source={require('./../../assets/back.jpg')} style={{ height: '100%', width:'100%'}}>
+          <ScrollView style={{ height: '100%'}}>
           <KeyboardAvoidingView  behavior="padding" enabled>
             <View style={styles.headerContainer}>
-              <Image
-                style={styles.logoBackground}
-                source={require('./../../assets/icon.png')}
-              />
+              <View style={styles.logoBackground}>
+                <Image
+                  style={styles.logoIconBackground}
+                  source={require('./../../assets/icon.png')}
+                />
+              </View>
             </View>
             <View style={styles.loginContainer}>
 
@@ -94,12 +97,11 @@ export default class LoginScreen extends Component {
                   Regístrate aquí
                 </Text>
               </View>
-
             </View>
-
           </KeyboardAvoidingView>
           </ScrollView>
-        </View>
+          </ImageBackground>
+
     );
   }
 

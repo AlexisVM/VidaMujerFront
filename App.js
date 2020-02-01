@@ -16,7 +16,7 @@ import ConfigScreen from './screens/configuration/config.js';
 import MyCoursesScreen from './screens/courses/myCourses.js';
 import LoginScreen from './screens/auth/login.js';
 import AuthLoadingScreen from './screens/auth/authLoading.js';
-
+import ProfileScreen from './screens/profile/profile.js';
 
 const AuthStack = createStackNavigator({
   Login: {
@@ -132,6 +132,7 @@ const HomeSideNavigation = createDrawerNavigator({
 const AppStack = createStackNavigator({
   Home: HomeSideNavigation,
   Social: SocialTopNavigator,
+  Profile: ProfileScreen,
 });
 
 export default createAppContainer(
@@ -140,6 +141,6 @@ export default createAppContainer(
     Auth: AuthStack,
     App: AppStack,
     },{
-      initialRouteName: 'App',
+      initialRouteName: 'AuthLoading',
   })
 );

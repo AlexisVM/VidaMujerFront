@@ -21,6 +21,8 @@ import { FlatGrid } from 'react-native-super-grid';
 import {BarIndicator} from 'react-native-indicators';
 import FbGrid from "react-native-fb-image-grid";
 import Gallery from 'react-native-image-gallery';
+import './../utils.js';
+
 
 
 
@@ -29,6 +31,7 @@ export default class ExperiencesScreen extends React.Component {
 		super(props);
 		this.state = {
 			isLoading :true,
+			me:null,
 			refreshing: false,
 			dataSource: null,
 			visible: false,
@@ -55,6 +58,9 @@ export default class ExperiencesScreen extends React.Component {
 		});
   }
 	componentDidMount (){
+		me().then(data=>{
+		 this.setState({me:data,isLoading:false});
+	 });
 		return fetch(global.host + '/api/experiencias/')
 			.then((response) => response.json())
 			.then((responseJson) => {

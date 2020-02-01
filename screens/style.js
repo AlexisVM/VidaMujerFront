@@ -211,9 +211,16 @@ export default StyleSheet.create({
   },
   logoBackground:{
     marginTop: 70,
-    width: 150,
-    height: 150,
-    backgroundColor:'#FFFFFF',
+    width: 180,
+    height: 180,
+    backgroundColor:'#fafafa',
+    borderRadius: 400/ 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoIconBackground:{
+    width: 130,
+    height: 130,
   },
   backgroundImage:{
     width: '100%',
@@ -221,9 +228,14 @@ export default StyleSheet.create({
   },
   headerContainer:{
     marginTop: 5,
-
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  profileHeaderContainer:{
+    marginTop: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#E188AE',
   },
   bodyContainer:{
     width: '100%',
