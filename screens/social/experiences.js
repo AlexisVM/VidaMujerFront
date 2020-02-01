@@ -101,7 +101,7 @@ export default class ExperiencesScreen extends React.Component {
                       <Icon 
                         name='close' 
                         type='material' 
-                        color='white' 
+                        color='black' 
                         size={60} 
                         onPress={() => {
                         this.setState({modalVisible:false});
