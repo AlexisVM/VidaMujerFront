@@ -9,7 +9,8 @@ import {
 		StyleSheet,
 		TouchableOpacity,
 		Image,
-		ActivityIndicator
+		ActivityIndicator,
+		Modal,
 		} from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import {
@@ -21,6 +22,7 @@ import { FlatGrid } from 'react-native-super-grid';
 import {BarIndicator} from 'react-native-indicators';
 import FbGrid from "react-native-fb-image-grid";
 import Gallery from 'react-native-image-gallery';
+import PageList from "react-native-page-list";
 
 
 
@@ -31,12 +33,8 @@ export default class ExperiencesScreen extends React.Component {
 			isLoading :true,
 			refreshing: false,
 			dataSource: null,
-			visible: false,
-			images: [
-				'https://cdn.pixabay.com/photo/2017/06/09/09/39/adler-2386314_960_720.jpg',
-  			'https://cdn.pixabay.com/photo/2017/06/02/18/24/fruit-2367029_960_720.jpg',
-  			'https://cdn.pixabay.com/photo/2016/08/12/22/34/apple-1589869_960_720.jpg'
-			],
+			modalVisible: false,
+			images: [],
 		}
 	}
 	_onRefresh = () => {
@@ -54,6 +52,9 @@ export default class ExperiencesScreen extends React.Component {
 			  console.log(error);
 		});
   }
+  	opengallery(images) {
+  		this.setState({modalVisible:true, images:images});
+  	}
 	componentDidMount (){
 		return fetch(global.host + '/api/experiencias/')
 			.then((response) => response.json())
@@ -80,7 +81,51 @@ export default class ExperiencesScreen extends React.Component {
 			);
 		} else{
 				return(
+
 					<ScrollView style={styles.background}>
+					<Modal
+                animationType="slide"
+                transparent={false}
+                visible={this.state.modalVisible}
+              >
+             <View style={{ flex: 1 }}>
+              <View style={{ 
+                      height:70,
+                      width:70,
+                      alignSelf: 'flex-end', 
+                      alignItems: 'center',
+                      borderWidth: 4,
+                      borderColor:'#FF0000', 
+                      borderRadius:35}} 
+                    >  
+                      <Icon 
+                        name='close' 
+                        type='material' 
+                        color='white' 
+                        size={60} 
+                        onPress={() => {
+                        this.setState({modalVisible:false});
+                      }}
+                      />
+                    </View>
+                     
+                     <PageList
+            data={this.state.images}
+            renderItem={({ item, index }) => {
+                return (
+                    <View key={index} style={{flex: 1, backgroundColor: "#000"}}>
+                        <Image
+                            source={{ uri: item }}
+                            style={{flex: 1}}
+                            resizeMode="contain"
+                        />
+                    </View>
+                );
+            }}
+        />
+
+             </View>
+             </Modal>
 						<View style={styles.headerContainer}>
 								<View style={{flexDirection: 'column', justifyContent: 'center', }}>
 									<View style={[styles.inputFormContainer, {width: wp('100%'), height: wp('10%'),  }]}>
@@ -124,7 +169,7 @@ export default class ExperiencesScreen extends React.Component {
 													images={
 														item.fotos
 													}
-													onPress={() => {this.setState({visible:true});}}
+													onPress={() => this.opengallery(item.fotos)}
 												/>
 
 
