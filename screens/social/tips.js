@@ -2,6 +2,7 @@ import React from 'react';
 import {
 		ScrollView,
 		RefreshControl,
+		ImageBackground,
 		View,
 		Share,
 		Platform,
@@ -31,9 +32,6 @@ export default class TipsScreen extends React.Component {
 			isLoading :true,
 			refreshing: false,
 			dataSource: null,
-			i_date:'',
-			message:null,
-			imgurl:null,
 		}
 	}
 	_onRefresh = () => {
@@ -101,21 +99,18 @@ export default class TipsScreen extends React.Component {
 							renderItem={({ item, index }) => (
 								<View style={styles.textItemGridContainer}>
 									<View style={styles.postCards}>
-										<View style={{flexDirection: 'row'}}>
-											<View>
-												<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center'}]}>
-													{item.titulo}
-												</Text>
-											</View>
-										</View>
-										<View>
-											<Text style={[styles.h3, {marginLeft: 10, fontWeight: 'normal'}]}>
-												{item.desc}
-											</Text>
-										</View>
-										<View>
-											<Image style={{height: wp('80%'), width: wp('80%')}} source={{uri: item.photo_thumbnail}}/>
-										</View>
+										<ImageBackground source={{uri: item.imagen}} style={{  height:'100%', width:'100%'}}>
+												<View style={{marginTop:100}}>
+												</View>
+												<View style={{backgroundColor:  '#00000070', color:'#FFFFFF'}}>
+													<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center', color:'#FFFFFF'}]}>
+														{item.titulo}
+													</Text>
+													<Text style={[styles.h3, {marginLeft: 10, fontWeight: 'normal', color:'#FFFFFF'}]}>
+														{item.desc}
+													</Text>
+												</View>
+									</ImageBackground>
 									</View>
 								</View>
 							)}

@@ -50,13 +50,12 @@ export default class ProfileScreen extends React.Component {
 				<ScrollView style={styles.background}>
 				<View style={styles.background}>
 					<Text>{"\n\n\n\n\n"}</Text>
-					<BarIndicator  color='#B1E001' />
+					<BarIndicator  color='#E188AE' />
 				</View>
 				</ScrollView>
 			);
 		} else{
 			return(
-        <ImageBackground source={require('./../../assets/back.jpg')} style={{ height: '100%', width:'100%'}}>
         <ScrollView style={{ height: '100%'}}>
 						<View style={styles.profileHeaderContainer}>
 						</View>
@@ -85,7 +84,6 @@ export default class ProfileScreen extends React.Component {
 							</View>
 						</View>
 					</ScrollView>
-        </ImageBackground>
 			);
 		}
 	}
@@ -97,7 +95,7 @@ export default class ProfileScreen extends React.Component {
 			//let dataStorage = [this.state.photo, ...data.info.photo]
 			//dataStorage = ["'",dataStorage,"'"]
 			//this.setState({photo:dataStorage});
-      console.log(data)
+      //console.log(data)
     });
 
   }

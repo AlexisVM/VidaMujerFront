@@ -22,10 +22,8 @@ import { FlatGrid } from 'react-native-super-grid';
 import {BarIndicator} from 'react-native-indicators';
 import FbGrid from "react-native-fb-image-grid";
 import Gallery from 'react-native-image-gallery';
-import './../utils.js';
+					import './../utils.js';
 import PageList from "react-native-page-list";
-
-
 
 export default class ExperiencesScreen extends React.Component {
 	constructor(props){
@@ -41,7 +39,7 @@ export default class ExperiencesScreen extends React.Component {
 	}
 	_onRefresh = () => {
 		this.setState({refreshing: true});
-		return fetch(global.host + '/api/experiencias/')
+		return fetch(global.host + '/api/experiencias/?ordering=-fecha')
 			.then((response) => response.json())
 			.then((responseJson) => {
 
@@ -54,14 +52,14 @@ export default class ExperiencesScreen extends React.Component {
 			  console.log(error);
 		});
   }
-  	opengallery(images) {
+  opengallery(images) {
   		this.setState({modalVisible:true, images:images});
   	}
 	componentDidMount (){
 		me().then(data=>{
 		 this.setState({me:data,isLoading:false});
 	 });
-		return fetch(global.host + '/api/experiencias/')
+		return fetch(global.host + '/api/experiencias/?ordering=-fecha')
 			.then((response) => response.json())
 			.then((responseJson) => {
 				this.setState({
@@ -87,7 +85,13 @@ export default class ExperiencesScreen extends React.Component {
 		} else{
 				return(
 
-					<ScrollView style={styles.background}>
+					<ScrollView style={styles.background}
+					refreshControl={
+						<RefreshControl
+							refreshing={this.state.refreshing}
+							onRefresh={this._onRefresh}
+						/>
+					}>
 					<Modal
                 animationType="slide"
                 transparent={false}
@@ -95,19 +99,20 @@ export default class ExperiencesScreen extends React.Component {
               >
              <View style={{ flex: 1 }}>
               <View style={{
-                      height:70,
+                      height:30,
                       width:70,
                       alignSelf: 'flex-end',
                       alignItems: 'center',
-                      borderWidth: 4,
-                      borderColor:'#FF0000',
+                      borderWidth: 2,
+											backgroundColor:'#ffffff',
+                      borderColor:'transparent',
                       borderRadius:35}}
                     >
                       <Icon
                         name='close'
                         type='material'
-                        color='white'
-                        size={60}
+                        color='black'
+                        size={30}
                         onPress={() => {
                         this.setState({modalVisible:false});
                       }}
@@ -188,5 +193,8 @@ export default class ExperiencesScreen extends React.Component {
 				);
 		}
 }
+	_newpost = () => {
+		this.props.navigation.navigate('newExperience');
+	};
 
 };

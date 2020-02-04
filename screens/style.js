@@ -10,13 +10,18 @@ import {
 export default StyleSheet.create({
   //B  u  t  t  o  n  s
   loginButton: {
-    backgroundColor: '#363636',
+    backgroundColor: '#E188AE',
     borderRadius: 5,
     height: hp('5%'),
     width: wp('80%'),
     marginTop: 10,
     marginBottom: 10,
     alignSelf: 'center',
+  },
+  courseButton: {
+    backgroundColor: '#E188AE',
+    height: hp('7%'),
+    width: wp('96%'),
   },
   postButton: {
     backgroundColor: 'transparent',
@@ -74,7 +79,7 @@ export default StyleSheet.create({
   },
   // L  a  b  e  l  s
   hyperlinkText: {
-    color: '#A6D8E3',
+    color: '#000000',
     fontSize: hp('2.1%'),
     textAlign: 'center',
   },
@@ -326,10 +331,9 @@ export default StyleSheet.create({
     width: wp('97%'),
     borderWidth: 2,
     borderColor: '#8c8c8c',
-    backgroundColor: '#ffffff',
     marginTop: 30,
-    marginBottom: 0,
     borderRadius:10,
+    backgroundColor:'#FFFFFF',
     //padding: 5,
     alignSelf: 'center',
   },

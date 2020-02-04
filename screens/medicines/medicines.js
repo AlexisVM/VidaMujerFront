@@ -37,7 +37,8 @@ export default class MedicinesScreen extends React.Component {
         photo_thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSm45m8GiBI3Tf9h8Q60s6L-Nq3cBkLDTW552TnakVqy5AltCz8",
 			}
 		],
-		isLoading :true,
+			isLoading :true,
+			refreshing:false,
 	}
 }
 	componentDidMount (){
@@ -54,6 +55,21 @@ export default class MedicinesScreen extends React.Component {
 				console.log(global.host + '/api/meds/');
 		});
 	}
+	_onRefresh = () => {
+
+		this.setState({refreshing: true});
+		return fetch(global.host + '/api/meds/')
+		.then((response) => response.json())
+		.then((responseJson) => {
+			this.setState({
+				refreshing:false,
+				dataSource:responseJson,
+			})
+		})
+		.catch((error) => {
+			console.log(error);
+		});
+  }
 	render(){
 		if (this.state.isLoading){
 			return (
@@ -67,13 +83,17 @@ export default class MedicinesScreen extends React.Component {
 		} else{
 				return(
 						<FlatGrid
+							refreshControl={<RefreshControl
+									refreshing={this.state.refreshing}
+									onRefresh={this._onRefresh}
+								/>}
 							itemDimension={wp('100%')}
 							items={this.state.dataSource?this.state.dataSource:[]}
 							renderItem={({ item, index }) => (
 								<View style={styles.textItemGridContainer}>
 									<View style={[styles.postCards,{alignItems: 'center'}]}>
 											<View>
-												<Image style={{height: wp('40%'), width: wp('40%')}} source={{uri: item.photo_thumbnail}}/>
+												<Image style={{height: wp('40%'), width: wp('40%'), marginTop:10}} source={{uri: item.photo_thumbnail}}/>
 											</View>
 											<View>
 												<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center'}]}>

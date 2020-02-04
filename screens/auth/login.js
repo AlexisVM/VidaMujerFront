@@ -1,28 +1,29 @@
 import React, { Component } from "react";
-import  './../../config';
-import {Config} from './../../config';
+//Styles
+import styles from './../style.js';
+import { Button, Icon, CheckBox  } from 'react-native-elements';
 import {
-        Keyboard,
         ImageBackground,
         Text,
         Image,
         ScrollView,
         View,
         TextInput,
-        TouchableWithoutFeedback,
-        Alert,
         KeyboardAvoidingView,
-        AsyncStorage
-      } from 'react-native';
-import { Button, Icon, CheckBox  } from 'react-native-elements';
+        AsyncStorage,
+    } from 'react-native';
 import {
         widthPercentageToDP as wp,
         heightPercentageToDP as hp
       } from 'react-native-responsive-screen';
+//Authentication
 import axios from 'axios';
-import styles from './../style.js';
+//Global host
+import  './../../config';
+import {Config} from './../../config';
 
 export default class LoginScreen extends Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -39,9 +40,8 @@ export default class LoginScreen extends Component {
 
   render() {
     return (
-
-          <ImageBackground source={require('./../../assets/back.jpg')} style={{ height: '100%', width:'100%'}}>
-          <ScrollView style={{ height: '100%'}}>
+      <ImageBackground source={require('./../../assets/back.jpg')} style={{ height: '100%', width:'100%'}}>
+        <ScrollView style={{ height: '100%'}}>
           <KeyboardAvoidingView  behavior="padding" enabled>
             <View style={styles.headerContainer}>
               <View style={styles.logoBackground}>
@@ -61,7 +61,6 @@ export default class LoginScreen extends Component {
                   />
                 </View>
               </View>
-
               <View style={styles.inputFormContainer /*Password*/}>
                 <View style={styles.inputContainer}>
                   <TextInput name="password" placeholder="Contraseña" placeholderTextColor="#00000090" style={styles.formTextInput}
@@ -69,27 +68,26 @@ export default class LoginScreen extends Component {
                   />
                 </View>
               </View>
-
               <View style={[styles.viewOpacity,{opacity: this.state.error ? 100 : 0}]}>
                 <Text style={styles.errorText}>
                   {this.state.error}
                 </Text>
               </View>
-
               <Button
                 buttonStyle={styles.loginButton}
                 onPress={this._onLoginPress}
                 title="Entrar"
-                titleStyle={styles.p}
+                titleStyle={[styles.p],{color:'#FFFFFF'}}
               />
-
               <View style={styles.lowOpacityContainer}>
+                {/*
                 <Text style={styles.subtitle_center}>
                   ¿Olvidaste tu contraseña?
                 </Text>
                 <Text style={styles.hyperlinkText} onPress={() => this.onForgetPress()}>
                   Recuperala aquí
                 </Text>
+                */}
                 <Text style={styles.subtitle_center}>
                   ¿No tienes cuenta aún?
                 </Text>
@@ -99,9 +97,8 @@ export default class LoginScreen extends Component {
               </View>
             </View>
           </KeyboardAvoidingView>
-          </ScrollView>
-          </ImageBackground>
-
+        </ScrollView>
+      </ImageBackground>
     );
   }
 
@@ -111,13 +108,13 @@ export default class LoginScreen extends Component {
 
   componentWillUnmount() {}
 
-
   _onLoginPress = async () =>  {
+
     console.log(global.host+'/api/auth/login/');
     axios.post(global.host+'/api/auth/login/', {
 			  username: this.state.username,
 			  password: this.state.password,
-		  }).then((response) => {
+      }).then((response) => {
 			  if(response.status==200){
           token=response.data.auth_token;
           console.log(token);
@@ -130,6 +127,10 @@ export default class LoginScreen extends Component {
 	  let token = null;
     console.log(this.state.username);
     console.log(this.state.password);
+  }
+
+  onSignUpPress(){
+	  this.props.navigation.navigate('SignUp', {})
   }
 
 }
