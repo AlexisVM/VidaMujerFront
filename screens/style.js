@@ -25,7 +25,7 @@ export default StyleSheet.create({
   },
   postButton: {
     backgroundColor: 'transparent',
-    borderRadius: hp('3.5%'),
+    borderRadius: hp('4%'),
     height: wp('10%'),
     width: wp('70%'),
     //marginTop: 30,
@@ -302,7 +302,7 @@ export default StyleSheet.create({
     width: hp('38%'),
     height: wp('38%'),
     marginTop: 20,
-    borderWidth: 2,
+    borderWidth: 4,
     borderColor: '#B1E001',
     borderRadius:10,
     padding: 10,
@@ -329,7 +329,7 @@ export default StyleSheet.create({
   },
   postCards:{
     width: wp('97%'),
-    borderWidth: 2,
+    borderWidth: 4,
     borderColor: '#8c8c8c',
     marginTop: 30,
     borderRadius:10,

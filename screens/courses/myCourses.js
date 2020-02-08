@@ -9,7 +9,6 @@ import {
 		Text,
 		Alert,
 		StyleSheet,
-		TouchableOpacity,
 		Image,
 		ActivityIndicator,
 		Modal,
@@ -27,48 +26,35 @@ import {
 import axios from 'axios';
 import  './../../config';
 import './../utils.js';
-import Video from 'react-native-video';
+import { Video } from 'expo-av';
+import VideoPlayer from 'expo-video-player';
 
 
 export default class MyCoursesScreen extends React.Component {
+
 	static navigationOptions = {
 		tabBarLabel:"Mis Cursos",
   };
+
 	constructor(props){
 		super(props);
 		this.state = {
 			isLoading :true,
 			refreshing: false,
-			dataSource: null,
+			dataSource: "",
 			modalVisible: false,
-			courses: "",
+			videoInfo: "",
 			me:null,
 			videos:"",
 		}
 	}
 
-	_onRefresh = () => {
-		this.setState({refreshing:true});
-		me().then(data=>{
-		 this.setState({me:data,refreshing:false,courses:data.compras});
-	 });
-  }
-
 	componentDidMount (){
 		me().then(data=>{
 		 this.setState({me:data,isLoading:false,courses:data.compras});
+		//this.state.courses.map(a => {console.log(a.paquete)});
+		 //console.log(data.compras)
 	 });
-	 return fetch(global.host + '/api/paquetes/')
-		 .then((response) => response.json())
-		 .then((responseJson) => {
-			 this.setState({dataSource:responseJson})
-		 }).then(()=>{console.log(this.state.dataSource);})
-	 .catch((error) => {
-			 console.log(error);
-			 console.log(global.host + '/api/paquetes/');
-	 });
-
-
 	}
 
 	render(){
@@ -90,6 +76,34 @@ export default class MyCoursesScreen extends React.Component {
 						onRefresh={this._onRefresh}
 					/>
 				}>
+					<Modal
+								transparent={false}
+								visible={this.state.modalVisible}
+							>
+								<View style={{ flex: 1 , backgroundColor:'#000000', alignItems:'center', justifyContent:'center',width:wp('100%')}}>
+
+									<View style={{alignItems:'center', backgroundColor:'#000000', transform: [{ rotate: '90deg'}]}}>
+														<VideoPlayer
+																videoProps={{
+																	shouldPlay: false,
+																	resizeMode: Video.RESIZE_MODE_CONTAIN,
+																	source: {
+																		uri: this.state.videoInfo.video,
+																	},
+																}}
+																inFullscreen={true}
+																showControlsOnLoad={true}
+																videoBackground='transparent'
+																showFullscreenButton={true}
+																height={wp('100%')}
+																switchToPortrait={() => this.setState({modalVisible:false})}
+															/>
+
+									</View>
+
+								</View>
+					</Modal>
+
 					<View style={styles.headerContainer}>
 						<Text style={[styles.h1, {textAlign: 'center'}]}>
 							Contratado
@@ -103,35 +117,64 @@ export default class MyCoursesScreen extends React.Component {
 							style={styles.gridView}
 							renderItem={({ item, index }) => (
 								<View style={styles.textItemGridContainer}>
-									<View style={[styles.postCards,{width: wp('70%')}]} >
+									<View style={[styles.postCards,{width: wp('92')}]} >
+										<ImageBackground source={require('./../../assets/back.jpg')} style={{width:'100%'}}>
 												<View style={{marginTop:40}}>
 												</View>
 												<View style={{backgroundColor:  '#00000070', color:'#FFFFFF'}}>
 													<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center', color:'#FFFFFF'}]}>
-														Paquete {item.paquete}
+														{item.paquete.titulo}
 													</Text>
 												</View>
+										</ImageBackground>
 									</View>
-									<Video
-    onEnd={this.onEnd}
-    onLoad={this.onLoad}
-    onLoadStart={this.onLoadStart}
-    onProgress={this.onProgress}
-    paused={this.state.paused}
-    ref={videoPlayer => (this.videoPlayer = videoPlayer)}
-    resizeMode={this.state.screenType}
-    onFullScreen={this.state.isFullScreen}
-    source={{ uri: 'https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4' }}
-    volume={10}
-/>
+									<View>
+										<FlatGrid
+										itemDimension={wp('100%')}
+										items={item.paquete.videos?item.paquete.videos:[]}
+										style={styles.gridView}
+										renderItem={({ item, index }) => (
+											<View style={{alignItems:'center'}}>
+												<VideoPlayer
+											      videoProps={{
+											        shouldPlay: false,
+											        resizeMode: Video.RESIZE_MODE_CONTAIN,
+											        source: {
+											          uri: item.video,
+											        },
+											      }}
+											      inFullscreen={true}
+											      showControlsOnLoad={true}
+														videoBackground='transparent'
+											      showFullscreenButton={false}
+														height={170}
+														width={300}
+														switchToPortrait={() => {this.openModal(item); ;}}
+											    />
+
+											</View>
+										)}
+									/>
+									</View>
+
 								</View>
 							)}
 						/>
 					</View>
 				</ScrollView>
 			);
-			}
+		}
+	}
 
-}
+	openModal(info) {
+		this.setState({modalVisible:true, videoInfo:info});
+	}
+
+	_onRefresh = () => {
+		this.setState({refreshing:true});
+		me().then(data=>{
+		 this.setState({me:data,refreshing:false,courses:data.compras});
+	 });
+  }
 
 };

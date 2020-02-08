@@ -164,7 +164,7 @@ export default class ExperiencesScreen extends React.Component {
 
 										<View style={styles.postCards}>
 											<View style={{flexDirection: 'row'}}>
-												<Image style={{height: hp('7%'), width: hp('7%')}} source={require('./../../assets/images/profile_default2.png')}/>
+												<Image style={{height: hp('7%'), width: hp('7%')}} source={require('./../../assets/icon.png')}/>
 												<View>
 													<Text style={[styles.h3, {marginLeft: 10}]}>
 														{item.username}
