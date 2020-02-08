@@ -39,6 +39,7 @@ export default class PaymentsScreen extends React.Component {
 			refreshing: false,
 			photo:null,
 			modalVisible: false,
+			modalPagoVisible: false,
 			course: "",
 			compraid:'',
 			costo:'',
@@ -130,6 +131,40 @@ export default class PaymentsScreen extends React.Component {
 
 							</View>
 					</Modal>
+					<Modal transparent={true} visible={this.state.modalPagoVisible}>
+							<View style={{ flex: 1 }}>
+
+								<View style={{
+												height:30,
+												width:70,
+												alignSelf: 'flex-end',
+												alignItems: 'center',
+												borderWidth: 2,
+												backgroundColor:'#ffffff',
+												borderColor:'transparent',
+												borderRadius:35}}>
+
+												<Icon
+													name='close'
+													type='material'
+													color='black'
+													size={30}
+													onPress={() => {
+													this.setState({modalPagoVisible:false});
+												}}
+												/>
+								</View>
+
+								<View style={{backgroundColor:  '#00000099', color:'#FFFFFF',justifyContent:'center',width:'100%',height:'50%'}}>
+									<Text style={[styles.h3, {marginLeft: 20,  color:'#FFFFFF'}]}>
+											Cuenta BBVA:
+									</Text>
+									<Text style={[styles.h3, {marginLeft: 20,  color:'#FFFFFF'}]}>
+											Clabe:
+									</Text>
+								</View>
+							</View>
+					</Modal>
 
 					<View style={styles.headerContainer}>
 						<Text style={[styles.h1, {textAlign: 'center'}]}>
@@ -138,6 +173,13 @@ export default class PaymentsScreen extends React.Component {
 					</View>
 
 					<View style={styles.bodyContainer}>
+						<View style={[styles.postCards,{width: wp('96')}]} >
+							<TouchableOpacity onPress={()=>{this.setState({modalPagoVisible:true});}} style={{backgroundColor: '#E188AE'}}>
+								<Text style={[styles.h3, { color:'#FFFFFF', textAlign:'center'}]}>
+									Ver datos de pago
+								</Text>
+							</TouchableOpacity>
+						</View>
 						<FlatGrid
 							itemDimension={wp('100%')}
 							items={this.state.courses?this.state.courses:[]}
@@ -158,15 +200,27 @@ export default class PaymentsScreen extends React.Component {
 
 												</View>
 												{item.uri &&
-												<View style={[(item.uri === 0)  ? {height:0}:{height:200, backgroundColor:'#00000090'}]}>
-
-													<Image style={{height: 200, resizeMode: 'contain'}} source={{uri: item.uri}}/>
+												<View >
+													<Image style={[(item.uri === 0)  ? {height:0}:{height:200, backgroundColor:'#00000090', resizeMode:'contain'}]} source={{uri: item.uri}}/>
+													<View style={{backgroundColor:  '#00000070', color:'#FFFFFF'}}>
+														{!item.aprobada &&
+														<Text style={[styles.p, { color:'#FFFFFF', textAlign:'center'}]}>
+															En cuanto tu pago sea aprobado, podrás ver los videos en la sección "Mis cursos"
+														</Text>
+														}
+														{item.aprobada &&
+														<Text style={[styles.p, { color:'#FFFFFF', textAlign:'center'}]}>
+															Pago aprobado
+														</Text>
+														}
+													</View>
 													<TouchableOpacity onPress={()=>{this._payclick(item.id, item.paquete.costo);}} style={{backgroundColor: '#E188AE'}}>
 														<Text style={[styles.h3, { color:'#FFFFFF', textAlign:'center'}]}>
 															Modificar Comprobante
 														</Text>
 													</TouchableOpacity>
 												</View>
+
 												}
 												{!item.uri &&
 												<TouchableOpacity onPress={()=>{this._payclick(item.id, item.paquete.costo);}} style={{backgroundColor: '#E188AE'}}>

@@ -28,6 +28,7 @@ export default class SignUpScreen extends Component {
 		super(props);
 		this.state = {
       username:null,
+      usererror:'',
       first_name: '',
       last_name: '',
       email:null,
@@ -224,6 +225,8 @@ export default class SignUpScreen extends Component {
       }
     }, (error) => {
       console.log(error.response.data);
+      this.setState({usererror:error.response.data.username});
+      Alert.alert(JSON.stringify(this.state.usererror).slice(2,-2), '', [{text: 'OK'},],);
       console.log("error");
     });
   }

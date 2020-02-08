@@ -161,8 +161,9 @@ export default class AddCourseScreen extends React.Component {
 	}
 
 	_onRefresh = () => {
+		this.setState({refreshing:true});
 		me().then(data=>{
-		 this.setState({me:data,isLoading:false});
+		 this.setState({me:data,refreshing:false});
 	 });
 		this._authget();
   }
@@ -204,7 +205,6 @@ export default class AddCourseScreen extends React.Component {
 		  		 paquete: this.state.course.id
 		  	 }).then(function (response) {
 					 Alert.alert('Curso Contratado', '', [{text: 'OK'},],);
-					 this._onRefresh
 		  	 }).catch(function (error) {
 		  		 console.log(error.response.data);
 		  	 }); }},

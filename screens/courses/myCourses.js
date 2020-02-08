@@ -125,10 +125,16 @@ export default class MyCoursesScreen extends React.Component {
 													<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center', color:'#FFFFFF'}]}>
 														{item.paquete.titulo}
 													</Text>
+													{!item.aprobada &&
+													<Text style={[styles.p, {marginLeft: 10, textAlign: 'center', color:'#FFFFFF'}]}>
+														(Pago no aprobado aún)
+													</Text>
+													}
 												</View>
 										</ImageBackground>
 									</View>
 									<View>
+									{item.aprobada &&
 										<FlatGrid
 										itemDimension={wp('100%')}
 										items={item.paquete.videos?item.paquete.videos:[]}
@@ -155,6 +161,7 @@ export default class MyCoursesScreen extends React.Component {
 											</View>
 										)}
 									/>
+									}
 									</View>
 
 								</View>
