@@ -86,7 +86,8 @@ export default StyleSheet.create({
   p:{
     fontWeight: 'bold',
     fontSize: hp('2.1%'),
-      color: '#828282', //#c4c3cb
+    color: '#828282', //#c4c3cb
+    fontFamily: 'sans-serif-light'
   },
   subtitle_center:{
     textAlign: 'center',
@@ -103,23 +104,27 @@ export default StyleSheet.create({
     color: '#828282',
     fontWeight: 'bold',
     fontSize: hp('6%'),
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'sans-serif-thin'
   },
   h2:{
     color: '#828282',
     fontWeight: 'bold',
     fontSize: hp('4%'),
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'sans-serif-light'
   },
   h3:{
     color: '#828282',
     fontWeight: 'bold',
     fontSize: hp('3%'),
+    fontFamily: 'sans-serif-light',
   },
   h4:{
     color: '#828282',
     fontWeight: 'bold',
     fontSize: hp('2.5%'),
+    fontFamily: 'sans-serif-light'
   },
   itemName: {
     textAlign: 'center',
@@ -329,7 +334,7 @@ export default StyleSheet.create({
   },
   postCards:{
     width: wp('97%'),
-    borderWidth: 4,
+    borderWidth: 2,
     borderColor: '#8c8c8c',
     marginTop: 30,
     borderRadius:10,

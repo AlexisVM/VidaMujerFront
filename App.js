@@ -54,7 +54,7 @@ const SocialTopNavigator = createMaterialTopTabNavigator({
     screen: TipsScreen,
     navigationOptions: {
             tabBarIcon:({ tintColor }) => (
-              <Icon name='stars' type='material' color={tintColor} size={25}/>
+              <Icon name='light-bulb' type='octicon' color={tintColor} size={25}/>
             )
     }
   },
@@ -146,7 +146,7 @@ const HomeSideNavigation = createDrawerNavigator({
     screen: MedicinesScreen,
     navigationOptions: {
       drawerIcon: (
-        <Icon name='healing' type='material' color='#000000' />
+        <Icon name='medkit' type='font-awesome' color='#000000' />
       ),
     }
   },
@@ -156,7 +156,7 @@ const HomeSideNavigation = createDrawerNavigator({
       drawerLabel: 'Ajustes',
       title: 'Ajustes',
       drawerIcon: (
-        <Icon name='settings-applications' type='material' color='#000000' />
+        <Icon name='build' type='material' color='#000000' />
       )
     }
   },
@@ -166,7 +166,7 @@ const HomeSideNavigation = createDrawerNavigator({
       drawerLabel: 'Mis cursos',
       title: 'Mis cursos',
       drawerIcon: (
-        <Icon name='dashboard' type='material' color='#000000' />
+        <Icon name='library-books' type='material' color='#000000' />
       )
     }
   },

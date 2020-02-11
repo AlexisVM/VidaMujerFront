@@ -1,4 +1,3 @@
-import React from 'react';
 import {
 		ScrollView,
 		RefreshControl,
@@ -11,24 +10,22 @@ import {
 		StyleSheet,
 		Image,
 		ActivityIndicator,
-		Modal,
-		} from 'react-native';
-import { Button, Icon } from 'react-native-elements';
-import * as Network from 'expo-network';
-import {Config} from './../../config';
-import styles from "./../style";
-import {BarIndicator} from 'react-native-indicators';
-import { FlatGrid } from 'react-native-super-grid';
+		Modal,} 							from 'react-native';
 import {
         widthPercentageToDP as wp,
-        heightPercentageToDP as hp
-      } from 'react-native-responsive-screen';
-import axios from 'axios';
+        heightPercentageToDP as hp} 							from 'react-native-responsive-screen';
+import React 						from 'react';
+import styles 					from "./../style";
+import { Video } 				from 'expo-av';
+import * as Network 		from 'expo-network';
+import { Config } 			from './../../config';
+import VideoPlayer 			from 'expo-video-player';
+import { FlatGrid } 		from 'react-native-super-grid';
+import { Button, Icon } from 'react-native-elements';
+import { BarIndicator } from 'react-native-indicators';
+import axios 						from 'axios';
 import  './../../config';
 import './../utils.js';
-import { Video } from 'expo-av';
-import VideoPlayer from 'expo-video-player';
-
 
 export default class MyCoursesScreen extends React.Component {
 
@@ -53,7 +50,7 @@ export default class MyCoursesScreen extends React.Component {
 		me().then(data=>{
 		 this.setState({me:data,isLoading:false,courses:data.compras});
 		//this.state.courses.map(a => {console.log(a.paquete)});
-		 //console.log(data.compras)
+		 console.log(data.compras)
 	 });
 	}
 
@@ -151,10 +148,15 @@ export default class MyCoursesScreen extends React.Component {
 														width={300}
 														switchToPortrait={() => {this.openModal(item); ;}}
 											    />
-
 											</View>
 										)}
 									/>
+									{item.paquete.consulta &&
+										<View style={[styles.postCards,{width: wp('85')}]}>
+											<Text style={styles.h2}>Consulta</Text>
+											<Text style={[styles.h4,{textAlign:'center'}]}>El paquete seleccionado incluye una consulta, pero será necesario subir una foto de los estudios de laboratorio antes de agendar una cita</Text>
+										</View>
+									}
 									</View>
 
 								</View>
