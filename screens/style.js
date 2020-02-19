@@ -337,7 +337,7 @@ export default StyleSheet.create({
     borderWidth: 2,
     borderColor: '#8c8c8c',
     marginTop: 30,
-    borderRadius:10,
+    borderRadius:5,
     backgroundColor:'#FFFFFF',
     //padding: 5,
     alignSelf: 'center',

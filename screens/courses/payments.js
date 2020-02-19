@@ -42,13 +42,14 @@ export default class PaymentsScreen extends React.Component {
 			course: "",
 			compraid:'',
 			costo:'',
+			aprobada:''
 		}
 	}
 
 	componentDidMount (){
 		me().then(data=>{
 		 this.setState({isLoading:false,courses:data.compras});
-		 console.log(data.compras);
+		 console.log(data);
 	 	});
 	}
 

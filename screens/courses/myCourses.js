@@ -8,6 +8,7 @@ import {
 		Text,
 		Alert,
 		StyleSheet,
+		TouchableOpacity,
 		Image,
 		ActivityIndicator,
 		Modal,} 							from 'react-native';
@@ -24,6 +25,7 @@ import { FlatGrid } 		from 'react-native-super-grid';
 import { Button, Icon } from 'react-native-elements';
 import { BarIndicator } from 'react-native-indicators';
 import axios 						from 'axios';
+import { Linking } from 'expo';
 import  './../../config';
 import './../utils.js';
 
@@ -43,6 +45,7 @@ export default class MyCoursesScreen extends React.Component {
 			videoInfo: "",
 			me:null,
 			videos:"",
+			aprobada:""
 		}
 	}
 
@@ -123,8 +126,16 @@ export default class MyCoursesScreen extends React.Component {
 														{item.paquete.titulo}
 													</Text>
 												</View>
+												{!item.aprobada &&
+												<View style={{ backgroundColor: '#00000090', color: '#FFFFFF' }}>
+													<Text style={[styles.h3, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF' }]}>
+														Cuando realices tu pago, podrás ver tus videos.
+													</Text>
+												</View>
+												}
 										</ImageBackground>
 									</View>
+									{item.aprobada &&
 									<View>
 										<FlatGrid
 										itemDimension={wp('100%')}
@@ -152,12 +163,15 @@ export default class MyCoursesScreen extends React.Component {
 										)}
 									/>
 									{item.paquete.consulta &&
+											<TouchableOpacity onPress={() => { Linking.openURL('whatsapp://send?text=Hola, ya pagué y me gustaría agendar una consulta, mi nombre es '+this.state.me.first_name+' '+this.state.me.last_name+'&phone=524422192605'); }}>
 										<View style={[styles.postCards,{width: wp('85')}]}>
 											<Text style={styles.h2}>Consulta</Text>
-											<Text style={[styles.h4,{textAlign:'center'}]}>El paquete seleccionado incluye una consulta, pero será necesario subir una foto de los estudios de laboratorio antes de agendar una cita</Text>
+											<Text style={[styles.h4,{textAlign:'center'}]}>Agenda tu consulta aqui</Text>
 										</View>
+										</TouchableOpacity>
 									}
 									</View>
+							}
 
 								</View>
 							)}
