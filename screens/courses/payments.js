@@ -1,9 +1,7 @@
 import React 						from 'react';
 import axios 						from 'axios';
 import styles 					from "./../style";
-import {Config}					from './../../config';
 import {FlatGrid} 			from 'react-native-super-grid';
-import * as Network 		from 'expo-network';
 import {BarIndicator} 	from 'react-native-indicators';
 import { Button, Icon } from 'react-native-elements';
 import * as ImagePicker from 'expo-image-picker';
@@ -16,14 +14,9 @@ import {
 					RefreshControl,
 					ImageBackground,
 					View,
-					Share,
-					Platform,
 					Text,
-					Alert,
-					StyleSheet,
 					TouchableOpacity,
 					Image,
-					ActivityIndicator,
 					Modal,
 			}									from 'react-native';
 import  './../../config';
@@ -42,14 +35,13 @@ export default class PaymentsScreen extends React.Component {
 			course: "",
 			compraid:'',
 			costo:'',
-			aprobada:''
 		}
 	}
 
 	componentDidMount (){
 		me().then(data=>{
 		 this.setState({isLoading:false,courses:data.compras});
-		 console.log(data);
+		 console.log(data.compras);
 	 	});
 	}
 
@@ -159,15 +151,32 @@ export default class PaymentsScreen extends React.Component {
 
 												</View>
 												{item.uri &&
-												<View style={[(item.uri === 0)  ? {height:0}:{height:200, backgroundColor:'#00000090'}]}>
-
-													<Image style={{height: 200, resizeMode: 'contain'}} source={{uri: item.uri}}/>
-													<TouchableOpacity onPress={()=>{this._payclick(item.id, item.paquete.costo);}} style={{backgroundColor: '#E188AE'}}>
-														<Text style={[styles.h3, { color:'#FFFFFF', textAlign:'center'}]}>
-															Modificar Comprobante
-														</Text>
-													</TouchableOpacity>
+												<View style={[(item.uri === 0)  ? {height:0}:{height:190, backgroundColor:'#00000090'}]}>
+													<Image style={{height: 190, resizeMode: 'contain'}} source={{uri: item.uri}}/>								
 												</View>
+												}
+												{!item.aprobada && item.uri &&
+												<View>
+													<View style={{ backgroundColor: '#00000070', color: '#FFFFFF' }}>
+														<Text style={[styles.h4, { color: '#FFFFFF', textAlign: 'center' }]}>
+															Tu pago está siendo revisado.
+														</Text>
+													</View>
+													<View>
+														<TouchableOpacity onPress={() => { this._payclick(item.id, item.paquete.costo); }} style={{ backgroundColor: '#E188AE' }}>
+															<Text style={[styles.h2, { color: '#FFFFFF', textAlign: 'center' }]}>
+																Modificar Comprobante
+															</Text>
+														</TouchableOpacity>
+													</View>
+												</View>
+												}
+												{item.aprobada &&
+													<View style={{ backgroundColor: '#00000070', color: '#FFFFFF' }}>
+														<Text style={[styles.h4, { color: '#FFFFFF', textAlign: 'center' }]}>
+															Pago aprobado.
+														</Text>
+													</View>
 												}
 												{!item.uri &&
 												<TouchableOpacity onPress={()=>{this._payclick(item.id, item.paquete.costo);}} style={{backgroundColor: '#E188AE'}}>

@@ -1,27 +1,18 @@
 import React, { Component } from "react";
 import styles from "./../style";
 import  './../../config';
-import moment from 'moment';
 import {
         Keyboard,
-        ImageBackground,
         Text,
         View,
         TextInput,
         TouchableWithoutFeedback,
-        Alert,
         KeyboardAvoidingView,
         ScrollView,
-        Picker,
-        Image,
         AsyncStorage
       } from 'react-native';
 import { Button, Icon } from 'react-native-elements';
 import axios from 'axios';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp
-} from 'react-native-responsive-screen';
 
 export default class SignUpScreen extends Component {
   constructor(props){

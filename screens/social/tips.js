@@ -4,19 +4,12 @@ import {
 		RefreshControl,
 		ImageBackground,
 		View,
-		Share,
-		Platform,
 		Text,
-		StyleSheet,
 		TouchableOpacity,
-		Image,
-		ActivityIndicator,
 		Modal
 		} from 'react-native';
 
 import { Icon } from 'react-native-elements';
-import * as Network from 'expo-network';
-import {Config} from './../../config';
 import styles from "./../style";
 import {BarIndicator} from 'react-native-indicators';
 import { FlatGrid } from 'react-native-super-grid';

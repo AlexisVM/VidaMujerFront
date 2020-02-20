@@ -3,14 +3,8 @@ import {
 		RefreshControl,
 		ImageBackground,
 		View,
-		Share,
-		Platform,
 		Text,
-		Alert,
-		StyleSheet,
 		TouchableOpacity,
-		Image,
-		ActivityIndicator,
 		Modal,} 							from 'react-native';
 import {
         widthPercentageToDP as wp,
@@ -18,13 +12,9 @@ import {
 import React 						from 'react';
 import styles 					from "./../style";
 import { Video } 				from 'expo-av';
-import * as Network 		from 'expo-network';
-import { Config } 			from './../../config';
 import VideoPlayer 			from 'expo-video-player';
 import { FlatGrid } 		from 'react-native-super-grid';
-import { Button, Icon } from 'react-native-elements';
 import { BarIndicator } from 'react-native-indicators';
-import axios 						from 'axios';
 import { Linking } from 'expo';
 import  './../../config';
 import './../utils.js';
@@ -128,15 +118,15 @@ export default class MyCoursesScreen extends React.Component {
 												</View>
 												{!item.aprobada &&
 												<View style={{ backgroundColor: '#00000090', color: '#FFFFFF' }}>
-													<Text style={[styles.h3, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF' }]}>
-														Cuando realices tu pago, podrás ver tus videos.
+													<Text style={[styles.h4, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF' }]}>
+														Cuando tu pago sea aprobado, podrás ver tus videos.
 													</Text>
 												</View>
 												}
 										</ImageBackground>
 									</View>
 									{item.aprobada &&
-									<View>
+										<View>
 										<FlatGrid
 										itemDimension={wp('100%')}
 										items={item.paquete.videos?item.paquete.videos:[]}
@@ -163,15 +153,15 @@ export default class MyCoursesScreen extends React.Component {
 										)}
 									/>
 									{item.paquete.consulta &&
-											<TouchableOpacity onPress={() => { Linking.openURL('whatsapp://send?text=Hola, ya pagué y me gustaría agendar una consulta, mi nombre es '+this.state.me.first_name+' '+this.state.me.last_name+'&phone=524422192605'); }}>
+											<TouchableOpacity onPress={() => { Linking.openURL('whatsapp://send?text=Hola, ya pagué y me gustaría agendar una consulta, mi nombre es '+this.state.me.first_name+' '+this.state.me.last_name+'&phone=524422020475'); }}>
 										<View style={[styles.postCards,{width: wp('85')}]}>
 											<Text style={styles.h2}>Consulta</Text>
-											<Text style={[styles.h4,{textAlign:'center'}]}>Agenda tu consulta aqui</Text>
+											<Text style={[styles.h4,{textAlign:'center'}]}>Contacta a la doctora y agenda tu consulta aqui</Text>
 										</View>
 										</TouchableOpacity>
 									}
 									</View>
-							}
+									}
 
 								</View>
 							)}

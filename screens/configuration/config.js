@@ -2,23 +2,14 @@ import React, { Component } from "react";
 import styles from "./../style";
 import {
         ScrollView,
-        Keyboard,
-        ImageBackground,
         Text,
         View,
-        TextInput,
         TouchableOpacity,
-        TouchableWithoutFeedback,
-        Alert,
-        KeyboardAvoidingView,
         AsyncStorage,
         Image,
-        Dimensions,
-        Platform
       } from 'react-native';
-import { Button, Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import { FlatGrid } from 'react-native-super-grid';
-import axios from 'axios';
 import './../utils.js';
 
 export default class HomeScreen extends Component {

@@ -3,13 +3,8 @@ import {
 		ScrollView,
 		RefreshControl,
 		View,
-		Share,
-		Platform,
 		Text,
-		StyleSheet,
-		TouchableOpacity,
 		Image,
-		ActivityIndicator,
 		Modal,
 		} from 'react-native';
 import { Button, Icon } from 'react-native-elements';
@@ -21,8 +16,7 @@ import styles from "./../style";
 import { FlatGrid } from 'react-native-super-grid';
 import {BarIndicator} from 'react-native-indicators';
 import FbGrid from "react-native-fb-image-grid";
-import Gallery from 'react-native-image-gallery';
-					import './../utils.js';
+import './../utils.js';
 import PageList from "react-native-page-list";
 
 export default class ExperiencesScreen extends React.Component {

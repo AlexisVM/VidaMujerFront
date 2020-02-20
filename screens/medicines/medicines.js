@@ -3,22 +3,20 @@ import {
 		ScrollView,
 		RefreshControl,
 		View,
-		Share,
-		Platform,
 		Text,
-		StyleSheet,
 		TouchableOpacity,
 		Image,
-		ActivityIndicator
 		} from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
-import { SectionGrid } from 'react-native-super-grid';
 import {BarIndicator} from 'react-native-indicators';
 import styles from "./../style";
 import {
         widthPercentageToDP as wp,
-        heightPercentageToDP as hp
-      } from 'react-native-responsive-screen';
+	  } from 'react-native-responsive-screen';
+import { Linking } from 'expo';
+import { showLocation } from "react-native-map-link";
+
+
 
 export default class MedicinesScreen extends React.Component {
 	constructor(props){
@@ -81,39 +79,111 @@ export default class MedicinesScreen extends React.Component {
 				</ScrollView>
 			);
 		} else{
-				return(
-						<FlatGrid
-							refreshControl={<RefreshControl
-									refreshing={this.state.refreshing}
-									onRefresh={this._onRefresh}
-								/>}
-							itemDimension={wp('100%')}
-							items={this.state.dataSource?this.state.dataSource:[]}
-							renderItem={({ item, index }) => (
-								<View style={styles.textItemGridContainer}>
-									<View style={[styles.postCards,{alignItems: 'center'}]}>
-											<View>
-												<Image style={{height: wp('40%'), width: wp('40%'), marginTop:10}} source={{uri: item.photo_thumbnail}}/>
-											</View>
-											<View>
-												<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center'}]}>
-													{item.nombre}
-												</Text>
-												<Text style={[styles.h3, {marginLeft: 10, textAlign: 'center'}]}>
-													{item.desc}
-												</Text>
-											</View>
-											<View>
-												<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center'}]}>
-													$ {item.costo}
-												</Text>
-											</View>
-									</View>
-								</View>
-							)}
-							/>
-
-				);
+				return (
+          <ScrollView>
+            <FlatGrid
+              refreshControl={
+                <RefreshControl
+                  refreshing={this.state.refreshing}
+                  onRefresh={this._onRefresh}
+                />
+              }
+              itemDimension={wp("100%")}
+              items={this.state.dataSource ? this.state.dataSource : []}
+              renderItem={({ item, index }) => (
+                <View style={styles.textItemGridContainer}>
+                  <View style={[styles.postCards, { alignItems: "center" }]}>
+                    <View>
+                      <Image
+                        style={{
+                          height: wp("40%"),
+                          width: wp("40%"),
+                          marginTop: 10
+                        }}
+                        source={{ uri: item.photo_thumbnail }}
+                      />
+                    </View>
+                    <View>
+                      <Text
+                        style={[
+                          styles.h2,
+                          { marginLeft: 10, textAlign: "center" }
+                        ]}
+                      >
+                        {item.nombre}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.h3,
+                          { marginLeft: 10, textAlign: "center" }
+                        ]}
+                      >
+                        {item.desc}
+                      </Text>
+                    </View>
+                    <View>
+                      <Text
+                        style={[
+                          styles.h2,
+                          { marginLeft: 10, textAlign: "center" }
+                        ]}
+                      >
+                        $ {item.costo}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              )}
+            />
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL(`tel:4422020475`);
+              }}
+            >
+              <View
+                style={[
+                  styles.postCards,
+                  { width: wp("96") }
+                ]}
+              >
+                <Text style={styles.h2}>Contáctanos</Text>
+                <Text style={[styles.h4, { textAlign: "center" }]}>
+                  Realiza una llamada telefónica para obtener más información
+                  sobre los medicamentos
+                </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                showLocation({
+                  latitude: 20.6285536,
+                  longitude: -100.4064983,
+                  //title: "Farmacia Vida Mujer", // optional
+                  googleForceLatLon: false, // optionally force GoogleMaps to use the latlon for the query instead of the title
+                  alwaysIncludeGoogle: true, // optional, true will always add Google Maps to iOS and open in Safari, even if app is not installed (default: false)
+                  dialogTitle: "Abrir en maps", // optional (default: 'Open in Maps')
+                  dialogMessage: "", // optional (default: 'What app would you like to use?')
+                  cancelText: "This is the cancel button text", // optional (default: 'Cancel')
+                  appsWhiteList: ["google-maps"] // optionally you can set which apps to show (default: will show all supported apps installed on device)
+                  // appTitles: { 'google-maps': 'My custom Google Maps title' } // optionally you can override default app titles
+                  // app: 'uber'  // optionally specify specific app to use
+                });
+              }}
+            >
+              <View
+                style={[
+                  styles.postCards,
+                  { width: wp("96"), marginBottom: 30 }
+                ]}
+              >
+                <Text style={styles.h2}>Ubícanos</Text>
+                <Text style={[styles.h4, { textAlign: "center" }]}>
+                  Identifícanos en el mapa
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </ScrollView>
+        );
 			}
 
 }

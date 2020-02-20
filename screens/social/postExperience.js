@@ -1,30 +1,18 @@
 import React, { Component } from "react";
 import styles from "./../style";
 import  './../../config';
-import moment from 'moment';
 import {
-        TouchableHighlight,
-        Keyboard,
-        ImageBackground,
-        TouchableOpacity,
         Text,
         View,
         TextInput,
-        TouchableWithoutFeedback,
-        Alert,
         KeyboardAvoidingView,
         ScrollView,
-        Picker,
-        Modal,
-        ActivityIndicator,
-        AsyncStorage,
-      	FlatList,
       	Image
       } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
-import { Button, Icon } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import {BarIndicator} from 'react-native-indicators';
 
 import axios from 'axios';

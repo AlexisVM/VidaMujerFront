@@ -81,7 +81,7 @@ const CoursesBottomNavigator = createBottomTabNavigator({
     screen: MyCoursesScreen,
     navigationOptions: {
             tabBarIcon:({ tintColor }) => (
-              <Icon name='stars' type='material' color={tintColor} size={25}/>
+              <Icon name='video-library' type='material' color={tintColor} size={25}/>
             )
     }
   },
@@ -89,7 +89,7 @@ const CoursesBottomNavigator = createBottomTabNavigator({
     screen: AddCourseScreen,
     navigationOptions: {
             tabBarIcon:({ tintColor }) => (
-                <Icon name='add-shopping-cart' type='material' color={tintColor} size={30}/>
+              <Icon name='plus' type='font-awesome' color={tintColor} size={25} />
             ),
 
         }
@@ -150,13 +150,13 @@ const HomeSideNavigation = createDrawerNavigator({
       ),
     }
   },
-  Ajustes: {
-    screen: ConfigScreen,
+  Perfil: {
+    screen: ProfileScreen,
     navigationOptions: {
-      drawerLabel: 'Ajustes',
-      title: 'Ajustes',
+      drawerLabel: 'Perfil',
+      title: 'Perfil',
       drawerIcon: (
-        <Icon name='build' type='material' color='#000000' />
+        <Icon name='account-circle' type='material' color='#000000' />
       )
     }
   },

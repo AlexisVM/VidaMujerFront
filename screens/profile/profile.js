@@ -1,32 +1,15 @@
 import React from 'react';
-import {Config} from './../../config';
 import {
-		StyleSheet,
-		Modal,
-		TouchableHighlight,
-		ScrollView,
-    Keyboard,
-    ImageBackground,
+	ScrollView,
     Text,
     View,
-    TextInput,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-    Alert,
-    KeyboardAvoidingView,
     AsyncStorage,
     Image,
-		ActivityIndicator
-		} from 'react-native';
+	} from 'react-native';
 import styles from "./../style";
-import axios from 'axios';
 import './../utils.js';
 import {BarIndicator} from 'react-native-indicators';
 import { Button, Icon } from 'react-native-elements';
-import {
-        widthPercentageToDP as wp,
-        heightPercentageToDP as hp
-      } from 'react-native-responsive-screen';
 
 export default class ProfileScreen extends React.Component {
 	constructor(props) {
@@ -56,34 +39,42 @@ export default class ProfileScreen extends React.Component {
 			);
 		} else{
 			return(
-        <ScrollView style={{ height: '100%'}}>
-						<View style={styles.profileHeaderContainer}>
+        		<ScrollView style={{ height: '100%'}}>	
+					<View style={[styles.bodyContainer]}>
+						<View style={[styles.postCards,{marginBottom:30}]}>
+						<View style={[styles.imageContainer,{marginBottom: 30}]}>
+							<Image style={{height: 120, width: 120}} source={require('./../../assets/icon.png')}/>
 						</View>
-						<View style={styles.bodyContainer}>
-              <View style={styles.imageContainer}>
-                <Image style={{height: 150, width: 150}} source={require('./../../assets/images/profile_default2.png')}/>
-              </View>
-							<View >
-                <Text style={[styles.h2, {marginBottom: 25}]}>
-                  @{this.state.me?this.state.me.username:''}
-                </Text>
-                <Text style={[styles.h1, {textAlign: 'center'}]}>
-                  {this.state.me?this.state.me.first_name:''}{" "}{this.state.me?this.state.me.last_name:''}
-                </Text>
-								<Text style={styles.h2}>
-									{this.state.me?this.state.me.email:''}
-								</Text>
-								{/*
-								<Button
-				                  buttonStyle={styles.loginButton}
-				                  //onPress={this._onLoginPress}
-				                  title="Editar"
-				                  titleStyle={styles.p}
-				                />
-				            	*/}
+						
+						<View >
+							<Text style={[styles.h4, { fontWeight: 'bold', textAlign: 'center', color:'#000000' }]}>
+								Usuario
+							</Text>
+							<Text style={[styles.h2, {marginBottom: 30}]}>
+							@{this.state.me?this.state.me.username:''}
+							</Text>
+							<Text style={[styles.h4, { fontWeight: 'bold', textAlign: 'center', color: '#000000' }]}>
+								Nombre
+							</Text>
+							<Text style={[styles.h1, { textAlign: 'center', marginBottom: 30}]}>
+							{this.state.me?this.state.me.first_name:''}{" "}{this.state.me?this.state.me.last_name:''}
+							</Text>
+							<Text style={[styles.h4, { fontWeight: 'bold', textAlign: 'center', color: '#000000' }]}>
+								Correo
+							</Text>
+							<Text style={[styles.h2, { marginBottom: 30}]}>
+								{this.state.me?this.state.me.email:''}
+							</Text>
+							<Button
+				                 buttonStyle={styles.loginButton}
+				                 onPress={this._signOut}
+				                 title="Cerrar sesión"
+				                 titleStyle={[styles.p,{color:'#FFFFFF'}]}
+				               />
 							</View>
-						</View>
-					</ScrollView>
+							</View>
+					</View>
+				</ScrollView>
 			);
 		}
 	}
@@ -99,5 +90,9 @@ export default class ProfileScreen extends React.Component {
     });
 
   }
+	_signOut = async () => {
+		await AsyncStorage.clear();
+		this.props.navigation.navigate('Auth');
+	};
   	componentWillUnmount() {}
 };
