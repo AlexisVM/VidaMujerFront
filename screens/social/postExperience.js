@@ -70,7 +70,7 @@ export default class PostExperienceScreen extends Component {
 
           <View style={styles.bodyContainer}>
             <View style={{flexDirection: 'row', height: wp('10%'), width: wp('80%'), alignSelf: 'center', marginBottom: 30 }}>
-                      <Image style={{height: wp('10%'), width: wp('10%')}} source={require('./../../assets/images/profile_default2.png')}/>
+                      <Image style={{height: wp('10%'), width: wp('10%')}} source={require('./../../assets/icon.png')}/>
                       <View style={{height: wp('10%'), flexDirection: 'column', justifyContent: 'center'}}>
                         <Text style={[styles.h3, {marginLeft: 10}]}>
                           {this.state.first} {this.state.last}
@@ -80,7 +80,7 @@ export default class PostExperienceScreen extends Component {
 
             <View style={styles.inputFormContainer} /*Publicacion*/>
                       <View style={styles.inputContainer}>
-                        <TextInput multiline maxLength={250} name="post" placeholder="Comparte tu experiencia" placeholderTextColor="#00000090"
+                        <TextInput multiline maxLength={250} name="post" placeholder="¡Comparte tu experiencia!" placeholderTextColor="#00000090"
                           numberOfLines={4} style={[styles.formTextInput]} onChangeText={(text) => this.setState({desc:text})}
                   	      value={this.state.name}
                         />
@@ -90,13 +90,13 @@ export default class PostExperienceScreen extends Component {
             <View style={{flexDirection: 'row', paddingTop: Constants.statusBarHeight,} /*Add_photo_button*/}>
                     <View style={{flex:1}}>
                       <Button
-                        buttonStyle={[styles.loginButton, {justifyContent: "flex-start", borderWidth: 2, borderColor: '#476C5E', backgroundColor:'transparent'}]}
+                  buttonStyle={[styles.loginButton, { justifyContent: "flex-start", borderWidth: 2, borderColor: '#E188AE', backgroundColor:'transparent'}]}
                         onPress={this._pickImage}
                         icon = {{
                                 name: "image",
                                 type: 'material',
                                 size: hp('4.2%'),
-                                color: "white"
+                                color: "#E188AE"
                               }}
                         title="Agregar foto"
                         titleStyle={styles.p}
@@ -113,7 +113,7 @@ export default class PostExperienceScreen extends Component {
                         buttonStyle={styles.loginButton}
                         onPress={this._post}
                         title="Publicar"
-                        titleStyle={styles.p}
+                        titleStyle={[styles.p,{color:'#FFFFFF'}]}
                       />
                     </View>
             </View>

@@ -35,12 +35,10 @@ export default StyleSheet.create({
     borderColor: '#8c8c8c',
   },
   fbLoginButton: {
-    borderRadius: 5,
     height: hp('5%'),
-    width: wp('80%'),
-    marginTop: 10,
+    width: wp('96%'),
     alignSelf: 'center',
-    backgroundColor: '#3b5998',
+    backgroundColor: '#E188AE',
   },
   // I  n  p  u  t  s
   formTextInput: {
@@ -85,7 +83,7 @@ export default StyleSheet.create({
   },
   p:{
     fontWeight: 'bold',
-    fontSize: hp('2.1%'),
+    fontSize: hp('2.7%'),
     color: '#828282', //#c4c3cb
     fontFamily: 'sans-serif-light'
   },

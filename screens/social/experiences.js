@@ -4,7 +4,9 @@ import {
 		RefreshControl,
 		View,
 		Text,
+		Platform,
 		Image,
+		Share,
 		Modal,
 		} from 'react-native';
 import { Button, Icon } from 'react-native-elements';
@@ -45,8 +47,8 @@ export default class ExperiencesScreen extends React.Component {
 		.catch((error) => {
 			  console.log(error);
 		});
-  }
-  opengallery(images) {
+	}
+	opengallery(images) {
   		this.setState({modalVisible:true, images:images});
   	}
 	componentDidMount (){
@@ -163,7 +165,7 @@ export default class ExperiencesScreen extends React.Component {
 													<Text style={[styles.h3, {marginLeft: 10}]}>
 														{item.username}
 													</Text>
-													<Text style={[styles.h4, {marginLeft: 10, fontWeight: 'normal'}]}>
+													<Text style={[styles.p, {marginLeft: 10, fontWeight: 'normal'}]}>
 														{item.desc}
 													</Text>
 												</View>
@@ -178,6 +180,14 @@ export default class ExperiencesScreen extends React.Component {
 
 
 											</View>
+											<Button buttonStyle={styles.fbLoginButton}
+												onPress={()=>{this._onShare(item.desc);}}
+												title="Compartir"
+												titleStyle={[styles.p, { color: '#FFFFFF' }]} >
+												<Text>
+													Compartir
+												</Text>
+											</Button>
 										</View>
 									</View>
 								)}
@@ -186,9 +196,29 @@ export default class ExperiencesScreen extends React.Component {
 					</ScrollView>
 				);
 		}
-}
+	}
 	_newpost = () => {
 		this.props.navigation.navigate('newExperience');
 	};
+	_onShare = async (texto) => {
+		try {
+			const result = await Share.share({
+				message:
+					'"' + texto + '"  ' + 'https://www.facebook.com/ginecologaisabelosorio/',
+				title: "| Vida Mujer | "
+			});
 
+			if (result.action === Share.sharedAction) {
+				if (result.activityType) {
+					// shared with activity type of result.activityType
+				} else {
+					// shared
+				}
+			} else if (result.action === Share.dismissedAction) {
+				// dismissed
+			}
+		} catch (error) {
+			alert(error.message);
+		}
+	};
 };

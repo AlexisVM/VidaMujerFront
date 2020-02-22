@@ -18,6 +18,7 @@ import {
 					TouchableOpacity,
 					Image,
 					Modal,
+					Clipboard
 			}									from 'react-native';
 import  './../../config';
 import './../utils.js';
@@ -32,9 +33,12 @@ export default class PaymentsScreen extends React.Component {
 			refreshing: false,
 			photo:null,
 			modalVisible: false,
+			modalpago:false,
 			course: "",
 			compraid:'',
 			costo:'',
+			clabeCopiado:false,
+			tarjetaCopiado:false,
 		}
 	}
 
@@ -67,9 +71,9 @@ export default class PaymentsScreen extends React.Component {
 						/>
 					}>
 					<Modal transparent={true} visible={this.state.modalVisible}>
-							<View style={{ flex: 1 , backgroundColor: 'rgba(0,0,0,0.7)'}}>
+						<View style={{ flex: 1 , backgroundColor: 'rgba(0,0,0,0.7)'}}>
 
-								<View style={{
+							<View style={{
 												height:30,
 												width:70,
 												alignSelf: 'flex-end',
@@ -90,7 +94,7 @@ export default class PaymentsScreen extends React.Component {
 												/>
 								</View>
 
-								<View style={{backgroundColor:  '#00000070', color:'#FFFFFF',justifyContent:'center',width:'100%'}}>
+							<View style={{backgroundColor:  '#00000070', color:'#FFFFFF',justifyContent:'center',width:'100%'}}>
 									<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center', color:'#FFFFFF'}]}>
 											Costo: ${this.state.costo}
 									</Text>
@@ -121,9 +125,54 @@ export default class PaymentsScreen extends React.Component {
 
 								</View>
 
+						</View>
+					</Modal>
+					<Modal transparent={true} visible={this.state.modalpago}>
+						<View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)' }}>
+							<View style={{
+								height: 30,
+								width: 70,
+								alignSelf: 'flex-end',
+								alignItems: 'center',
+								borderWidth: 2,
+								backgroundColor: '#ffffff',
+								borderColor: 'transparent',
+								borderRadius: 35
+							}}>
+
+								<Icon
+									name='close'
+									type='material'
+									color='black'
+									size={30}
+									onPress={() => {
+										this.setState({ modalpago: false });
+									}}
+								/>
 							</View>
+
+							<View style={{ backgroundColor: '#00000070', color: '#FFFFFF', justifyContent: 'center', width: '100%', marginTop:80, marginBottom:80 }}>
+								<Text style={[styles.h2, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF' }]}>
+									Cuenta Bancomer
+								</Text>
+								<TouchableOpacity onPress={() => {Clipboard.setString('012680029978573061'); this.setState({ clabeCopiado: true }); setTimeout(() => {this.setState({clabeCopiado: false});}, 1000);}}>
+									<Text style={[styles.h3, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF', marginTop: 10 }]}>
+										Cuenta Clabe: 012 680 029 978 573 061 
+									</Text>
+									{this.state.clabeCopiado && <Text style={[styles.h4, { textAlign: 'center', color: '#FFFFFF', marginTop: 5 }]}>Copiado!</Text>}
+								</TouchableOpacity>
+								<TouchableOpacity onPress={() => { Clipboard.setString('4152313495017480'); this.setState({ tarjetaCopiado: true }); setTimeout(() => { this.setState({ tarjetaCopiado: false }); }, 1000); }}>
+									<Text style={[styles.h3, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF', marginTop: 10 }]}>
+										Tarjeta: 4152 3134 9501 7480
+									</Text>
+									{this.state.tarjetaCopiado && <Text style={[styles.h4, { textAlign: 'center', color: '#FFFFFF', marginTop: 5 }]}>Copiado!</Text>}
+								</TouchableOpacity>
+							</View>
+
+						</View>
 					</Modal>
 
+					
 					<View style={styles.headerContainer}>
 						<Text style={[styles.h1, {textAlign: 'center'}]}>
 							Pagos
@@ -131,6 +180,16 @@ export default class PaymentsScreen extends React.Component {
 					</View>
 
 					<View style={styles.bodyContainer}>
+						<View style={[styles.postCards, { width: wp('96'), textAlign:'center'}]} >
+							<TouchableOpacity onPress={() => { this.setState({modalpago:true}) }}>
+								<View style={{ backgroundColor: '#00000070', color: '#FFFFFF' }}>
+									<Text style={[styles.h3, { color: '#FFFFFF',  textAlign:'center' }]}>
+										Ver datos de pago
+									</Text>
+								</View>
+							</TouchableOpacity>
+						</View>
+
 						<FlatGrid
 							itemDimension={wp('100%')}
 							items={this.state.courses?this.state.courses:[]}
