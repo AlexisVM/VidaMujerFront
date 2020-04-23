@@ -38,6 +38,8 @@ export default class PaymentsScreen extends React.Component {
 			compraid:'',
 			costo:'',
 			clabeCopiado:false,
+			noCuenta: false,
+			telefono: false,
 			tarjetaCopiado:false,
 		}
 	}
@@ -155,17 +157,29 @@ export default class PaymentsScreen extends React.Component {
 								<Text style={[styles.h2, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF' }]}>
 									Cuenta Bancomer
 								</Text>
-								<TouchableOpacity onPress={() => {Clipboard.setString('012680029978573061'); this.setState({ clabeCopiado: true }); setTimeout(() => {this.setState({clabeCopiado: false});}, 1000);}}>
-									<Text style={[styles.h3, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF', marginTop: 10 }]}>
-										Cuenta Clabe: 012 680 029 978 573 061 
+								<TouchableOpacity onPress={() => { Clipboard.setString('2997857306'); this.setState({ noCuenta: true }); setTimeout(() => { this.setState({ noCuenta: false }); }, 1000); }}>
+									<Text style={[styles.paymentText]}>
+										Número de Cuenta: 299 785 7306
 									</Text>
-									{this.state.clabeCopiado && <Text style={[styles.h4, { textAlign: 'center', color: '#FFFFFF', marginTop: 5 }]}>Copiado!</Text>}
+									{this.state.noCuenta && <Text style={[styles.h4, { textAlign: 'center', color: '#FFFFFF', marginTop: 5 }]}>¡Copiado!</Text>}
+								</TouchableOpacity>
+								<TouchableOpacity onPress={() => {Clipboard.setString('012680029978573061'); this.setState({ clabeCopiado: true }); setTimeout(() => {this.setState({clabeCopiado: false});}, 1000);}}>
+									<Text style={[styles.paymentText]}>
+										Cuenta CLABE: 012 680 029 978 573 061 
+									</Text>
+									{this.state.clabeCopiado && <Text style={[styles.h4, { textAlign: 'center', color: '#FFFFFF', marginTop: 5 }]}>¡Copiado!</Text>}
 								</TouchableOpacity>
 								<TouchableOpacity onPress={() => { Clipboard.setString('4152313495017480'); this.setState({ tarjetaCopiado: true }); setTimeout(() => { this.setState({ tarjetaCopiado: false }); }, 1000); }}>
-									<Text style={[styles.h3, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF', marginTop: 10 }]}>
-										Tarjeta: 4152 3134 9501 7480
+									<Text style={[styles.paymentText]}>
+										Número de Tarjeta: 4152 3134 9501 7480
 									</Text>
-									{this.state.tarjetaCopiado && <Text style={[styles.h4, { textAlign: 'center', color: '#FFFFFF', marginTop: 5 }]}>Copiado!</Text>}
+									{this.state.tarjetaCopiado && <Text style={[styles.h4, { textAlign: 'center', color: '#FFFFFF', marginTop: 5 }]}>¡Copiado!</Text>}
+								</TouchableOpacity>
+								<TouchableOpacity onPress={() => { Clipboard.setString('4426684370'); this.setState({ telefono: true }); setTimeout(() => { this.setState({ telefono: false }); }, 1000); }}>
+									<Text style={[styles.h4, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF', marginTop: 10 }]}>
+										*Para más información sobre tu pago comunícate vía whatsapp al: +52 442 668 4370
+									</Text>
+									{this.state.telefono && <Text style={[styles.h4, { textAlign: 'center', color: '#FFFFFF', marginTop: 5 }]}>¡Número Copiado!</Text>}
 								</TouchableOpacity>
 							</View>
 

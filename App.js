@@ -77,6 +77,15 @@ const SocialTopNavigator = createMaterialTopTabNavigator({
   }
 });
 const CoursesBottomNavigator = createBottomTabNavigator({
+  Paquetes: {
+    screen: AddCourseScreen,
+    navigationOptions: {
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name='plus' type='font-awesome' color={tintColor} size={25} />
+      ),
+
+    }
+  },
   Cursos:{
     screen: MyCoursesScreen,
     navigationOptions: {
@@ -84,15 +93,6 @@ const CoursesBottomNavigator = createBottomTabNavigator({
               <Icon name='video-library' type='material' color={tintColor} size={25}/>
             )
     }
-  },
-  Paquetes:{
-    screen: AddCourseScreen,
-    navigationOptions: {
-            tabBarIcon:({ tintColor }) => (
-              <Icon name='plus' type='font-awesome' color={tintColor} size={25} />
-            ),
-
-        }
   },
   Pagos:{
     screen: PaymentsScreen,

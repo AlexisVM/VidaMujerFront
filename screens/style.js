@@ -117,6 +117,15 @@ export default StyleSheet.create({
     fontSize: hp('2.5%'),
     fontFamily: 'sans-serif-light',
   },
+  paymentText:{
+    fontWeight: 'bold',
+    fontSize: hp('2.5%'),
+    fontFamily: 'sans-serif-light',
+    marginLeft: 10, 
+    marginTop: 10,
+    textAlign: 'center', 
+    color: '#FFFFFF'
+  },
   h4:{
     color: '#828282',
     fontWeight: 'bold',

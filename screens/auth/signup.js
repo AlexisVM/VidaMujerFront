@@ -30,11 +30,10 @@ export default class SignUpScreen extends Component {
 
 	render() {
 	  return (
-      <KeyboardAvoidingView style={styles.containerView} keyboardVerticalOffset={85} behavior="padding">
-          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <View style={styles.screenContainer}>
-              <ScrollView style={styles.background}>
+      <ScrollView style={styles.background}>
 
+        <KeyboardAvoidingView style={styles.containerView} keyboardVerticalOffset={85} behavior="padding">
+              
                 <View style={styles.headerContainer}>
                 </View>
                 <View style={styles.bodyContainer}>
@@ -139,6 +138,10 @@ export default class SignUpScreen extends Component {
                         secureTextEntry={true} onChangeText={(text) => this.setState({password:text})} value={this.state.password}
                       />
                     </View>
+                    <Text>
+                {this.state.password}
+
+                    </Text>
                   </View>
 
                   <View style={styles.inputFormContainer} /*Password_confirmation*/>
@@ -173,10 +176,9 @@ export default class SignUpScreen extends Component {
                     </Text>
                   </View>
                 </View>
-              </ScrollView>
-            </View>
-          </TouchableWithoutFeedback>
+              
       </KeyboardAvoidingView>
+      </ScrollView>
 
 
     );
@@ -185,7 +187,7 @@ export default class SignUpScreen extends Component {
   verifyInputs = () => {
     this.setState({formSubmitted:true});
     var passwordIsValid = (this.state.password)?
-                                  (this.state.password === this.state.password_confirmation)?  true : false
+                                  (this.state.password === this.state.password_confirmation) ? true : false 
                           : false;
     //verify all inputs
     if (this.state.username && this.state.first_name && this.state.last_name && passwordIsValid && this.verifyMail(this.state.email)){
