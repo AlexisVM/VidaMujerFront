@@ -133,6 +133,7 @@ export default class MyCoursesScreen extends React.Component {
 										style={styles.gridView}
 										renderItem={({ item, index }) => (
 											<View style={{alignItems:'center'}}>
+												<Text style={styles.h2}>{item.titulo}</Text>
 												<VideoPlayer
 											      videoProps={{
 											        shouldPlay: false,
