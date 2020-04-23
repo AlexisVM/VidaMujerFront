@@ -93,7 +93,7 @@ export default class TipsScreen extends React.Component {
 								transparent={true}
 								visible={this.state.modalVisible}
 							>
-							<View style={{ flex: 1 , backgroundColor: 'rgba(0,0,0,0.7)'}}>
+							<ScrollView style={{ flex: 1 , backgroundColor: 'rgba(0,0,0,0.7)'}}>
 								<View style={[styles.postCards,{marginTop:70}]}>
 									<View style={{
 													height:30,
@@ -128,7 +128,7 @@ export default class TipsScreen extends React.Component {
 									<View style={{backgroundColor: 'rgba(0,0,0,0.7)', height: wp('2%')}}>
 									</View>
 								</View>
-							</View>
+							</ScrollView>
 					</Modal>
 
 					<View style={styles.headerContainer}>

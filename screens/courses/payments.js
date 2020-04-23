@@ -151,7 +151,7 @@ export default class PaymentsScreen extends React.Component {
 								/>
 							</View>
 
-							<View style={{ backgroundColor: '#00000070', color: '#FFFFFF', justifyContent: 'center', width: '100%', marginTop:80, marginBottom:80 }}>
+							<View style={{ backgroundColor: '#000000', color: '#FFFFFF', justifyContent: 'center', width: '100%', marginTop:80, marginBottom:80 }}>
 								<Text style={[styles.h2, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF' }]}>
 									Cuenta Bancomer
 								</Text>

@@ -133,18 +133,18 @@ export default class ExperiencesScreen extends React.Component {
              </View>
              </Modal>
 						<View style={styles.headerContainer}>
-								<View style={{flexDirection: 'column', justifyContent: 'center', }}>
+								<View style={{flexDirection: 'column', justifyContent: 'center', marginTop:10 }}>
 									<View style={[styles.inputFormContainer, {width: wp('100%'), height: wp('10%'),  }]}>
 										<View style={{height: wp('10%'), width: wp('10%'),}}>
-											<Image style={{height: wp('10%'), width: wp('10%')}} source={require('./../../assets/images/profile_default2.png')}/>
+											<Image style={{height: wp('10%'), width: wp('10%')}} source={require('./../../assets/icon.png')}/>
 										</View>
-										<View style={{height: wp('10%'), width: wp('70%'), alignSelf:'flex-end',
+										<View style={{width: wp('70%'), alignSelf:'flex-end',
 										flexDirection: 'column', justifyContent: 'center'}}>
 											<Button
 												buttonStyle={[styles.postButton, {justifyContent: "flex-start",}]}
 												onPress={this._newpost}
-												title="Comparte tu experiencia"
-												titleStyle={[styles.p],{ marginLeft: 10, fontWeight: 'normal', color: '#828282'}}
+												title="Comparte algo.."
+												titleStyle={[styles.h1],{ marginLeft: 10,  color: '#828282'}}
 											/>
 										</View>
 									</View>
@@ -159,13 +159,13 @@ export default class ExperiencesScreen extends React.Component {
 									<View style={styles.textItemGridContainer}>
 
 										<View style={styles.postCards}>
-											<View style={{flexDirection: 'row'}}>
+											<View style={{ flexDirection: 'row', marginRight: 20}}>
 												<Image style={{height: hp('7%'), width: hp('7%')}} source={require('./../../assets/icon.png')}/>
 												<View>
-													<Text style={[styles.h3, {marginLeft: 10}]}>
+													<Text style={[styles.h3, { marginLeft: 10, marginRight: 10}]}>
 														{item.username}
 													</Text>
-													<Text style={[styles.p, {marginLeft: 10, fontWeight: 'normal'}]}>
+													<Text style={[styles.p, {marginLeft: 10, fontWeight: 'normal', marginRight: 20}]}>
 														{item.desc}
 													</Text>
 												</View>

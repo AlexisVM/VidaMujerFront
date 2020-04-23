@@ -26,7 +26,6 @@ export default StyleSheet.create({
   postButton: {
     backgroundColor: 'transparent',
     borderRadius: hp('4%'),
-    height: wp('10%'),
     width: wp('70%'),
     //marginTop: 30,
     //marginBottom: 10,
@@ -83,7 +82,7 @@ export default StyleSheet.create({
   },
   p:{
     fontWeight: 'bold',
-    fontSize: hp('2.7%'),
+    fontSize: hp('1.7%'),
     color: '#828282', //#c4c3cb
     fontFamily: 'sans-serif-light'
   },
@@ -101,27 +100,27 @@ export default StyleSheet.create({
   h1:{
     color: '#828282',
     fontWeight: 'bold',
-    fontSize: hp('6%'),
+    fontSize: hp('4%'),
     textAlign: 'center',
     fontFamily: 'sans-serif-thin'
   },
   h2:{
     color: '#828282',
     fontWeight: 'bold',
-    fontSize: hp('4%'),
+    fontSize: hp('3%'),
     textAlign: 'center',
     fontFamily: 'sans-serif-light'
   },
   h3:{
     color: '#828282',
     fontWeight: 'bold',
-    fontSize: hp('3%'),
+    fontSize: hp('2.5%'),
     fontFamily: 'sans-serif-light',
   },
   h4:{
     color: '#828282',
     fontWeight: 'bold',
-    fontSize: hp('2.5%'),
+    fontSize: hp('2%'),
     fontFamily: 'sans-serif-light'
   },
   itemName: {

@@ -1,16 +1,15 @@
 {
   "expo": {
-    "name": "Vida Mujer",
-    "slug": "VidaMujer",
+    "name": "Mujer Vida",
+    "slug": "MujerVida",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
-      "ios",
       "android",
       "web"
     ],
     "android": {
-      "package": "com.vazma.VidaMujer",
+      "package": "com.vazma.MujerVida",
       "versionCode": 1
     },
     "version": "1.0.0",
@@ -29,6 +28,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": ""
   }
 }

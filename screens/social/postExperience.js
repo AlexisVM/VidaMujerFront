@@ -163,7 +163,7 @@ export default class PostExperienceScreen extends Component {
 
 	 axios.post(global.host+'/api/experiencias/', {
 		 usuario: this.state.me.id,
-		 titulo: this.state.me.username,
+		 titulo: this.state.me.id,
      desc: this.state.desc,
 	 }).then(function (response) {
         alert('Publicacion enviada');

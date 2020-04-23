@@ -153,7 +153,7 @@ export default class MyCoursesScreen extends React.Component {
 										)}
 									/>
 									{item.paquete.consulta &&
-											<TouchableOpacity onPress={() => { Linking.openURL('whatsapp://send?text=Hola, ya pagué y me gustaría agendar una consulta, mi nombre es '+this.state.me.first_name+' '+this.state.me.last_name+'&phone=524422020475'); }}>
+											<TouchableOpacity onPress={() => { Linking.openURL('whatsapp://send?text=Hola, ya pagué y me gustaría agendar una consulta, mi nombre es ' + this.state.me.first_name + ' ' + this.state.me.last_name +'&phone=5214426684370'); }}>
 										<View style={[styles.postCards,{width: wp('85')}]}>
 											<Text style={styles.h2}>Consulta</Text>
 											<Text style={[styles.h4,{textAlign:'center'}]}>Contacta a la doctora y agenda tu consulta aqui</Text>

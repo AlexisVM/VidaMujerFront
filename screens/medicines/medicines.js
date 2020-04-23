@@ -137,7 +137,7 @@ export default class MedicinesScreen extends React.Component {
             />
             <TouchableOpacity
               onPress={() => {
-                Linking.openURL(`tel:4422020475`);
+                Linking.openURL(`tel:52 442 881 0036`);
               }}
             >
               <View
