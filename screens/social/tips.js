@@ -132,7 +132,7 @@ export default class TipsScreen extends React.Component {
 					</Modal>
 
 					<View style={styles.headerContainer}>
-						<Text style={[styles.h1, {textAlign: 'center'}]}>
+						<Text style={styles.h1}>
 							Tips
 						</Text>
 					</View>

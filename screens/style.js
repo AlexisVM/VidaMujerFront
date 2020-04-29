@@ -2,8 +2,6 @@ const React = require("react-native");
 const { StyleSheet } = React;
 const VMGray = '#8c8c8c';
 const VMPink = '#E188AE';
-import {Dimensions} from 'react-native';
-
 import {
         widthPercentageToDP as wp,
         heightPercentageToDP as hp
@@ -62,7 +60,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
     justifyContent: "flex-start",
   },
-  courseButton: {
+  addCourseButton: {
     backgroundColor: VMPink,
     height: hp('7%'),
     width: wp('96%'),
@@ -71,15 +69,14 @@ export default StyleSheet.create({
     backgroundColor: 'transparent',
     borderRadius: hp('4%'),
     width: wp('70%'),
-    //marginTop: 30,
-    //marginBottom: 10,
     alignSelf: 'center',
     borderWidth: 2,
     borderColor: VMGray
   },
-  fbLoginButton: {
+  shareButton: {
     height: hp('5%'),
-    width: wp('96%'),
+    width: wp('92%'),
+    marginBottom: 5,
     alignSelf: 'center',
     backgroundColor: VMPink,
   },
@@ -300,4 +297,9 @@ export default StyleSheet.create({
     //padding: 5,
     alignSelf: 'center',
   },
+  //C O N T A I N E R S
+  imageBackground:{
+    height: '100%', 
+    width: '100%'
+  }
 });

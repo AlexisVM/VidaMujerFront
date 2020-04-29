@@ -105,7 +105,7 @@ export default class AddCourseScreen extends React.Component {
 									</View>
 									</ImageBackground>
 									<Button
-	                  buttonStyle={styles.courseButton}
+	                  buttonStyle={styles.addCourseButton}
 	                  onPress={this._post}
 	                  title="Contratar"
 	                  titleStyle={[styles.p,{color:'#FFFFFF'}]}
@@ -115,8 +115,8 @@ export default class AddCourseScreen extends React.Component {
 					</Modal>
 
 						<View style={styles.headerContainer}>
-							<Text style={[styles.h1, {textAlign: 'center'}]}>
-								PaquetesDisponibles
+							<Text style={styles.h1}>
+								Paquetes Disponibles
 							</Text>
 						</View>
 

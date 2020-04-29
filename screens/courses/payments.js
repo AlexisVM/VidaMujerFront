@@ -182,7 +182,7 @@ export default class PaymentsScreen extends React.Component {
 					</Modal>
 	
 					<View style={styles.headerContainer}>
-						<Text style={[styles.h1, {textAlign: 'center'}]}>
+						<Text style={styles.h1}>
 							Pagos
 						</Text>
 					</View>

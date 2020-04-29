@@ -1,7 +1,9 @@
-import React, { Component } from "react";
-//Styles
-import styles from './../style.js';
-import { Button  } from 'react-native-elements';
+//Components, styles
+import React, { Component }             from "react";
+import styles                           from './../style.js';
+import { Button  }                      from 'react-native-elements';
+//Authentication
+import axios                            from 'axios';
 import {
         ImageBackground,
         Text,
@@ -11,10 +13,7 @@ import {
         TextInput,
         KeyboardAvoidingView,
         AsyncStorage,
-    } from 'react-native';
-
-//Authentication
-import axios from 'axios';
+    }                                   from 'react-native';
 //Global host
 import  './../../config';
 
@@ -30,14 +29,13 @@ export default class LoginScreen extends Component {
   }
 
   static navigationOptions = {
-    //To hide the NavigationBar from current Screen
     headerShown: false,
   };
 
   render() {
     return (
-      <ImageBackground source={require('./../../assets/back.jpg')} style={{ height: '100%', width:'100%'}}>
-        <ScrollView style={{ height: '100%'}}>
+      <ImageBackground style={styles.imageBackground} source={require('./../../assets/back.jpg')}>
+        <ScrollView>
           <KeyboardAvoidingView  behavior="padding" enabled>
             <View style={styles.headerContainer}>
               <View style={styles.logoBackground}>
@@ -59,7 +57,7 @@ export default class LoginScreen extends Component {
               </View>
               <View style={styles.inputFormContainer /*Password*/}>
                 <View style={styles.inputContainer}>
-                  <TextInput name="password" placeholder="Contraseña" placeholderTextColor="#00000090" style={styles.formTextInput}
+                  <TextInput name="password"  placeholder="Contraseña" placeholderTextColor="#00000090" style={styles.formTextInput}
                     secureTextEntry={true} onChangeText={(text) => this.setState({password:text})} value={this.state.password}
                   />
                 </View>
@@ -105,8 +103,6 @@ export default class LoginScreen extends Component {
   componentWillUnmount() {}
 
   _onLoginPress = async () =>  {
-
-    console.log(global.host+'/api/auth/login/');
     axios.post(global.host+'/api/auth/login/', {
 			  username: this.state.username,
 			  password: this.state.password,
@@ -121,8 +117,6 @@ export default class LoginScreen extends Component {
 			  this.setState({  error:"Usuario o contraseña inválida" });
 		  });
 	  let token = null;
-    console.log(this.state.username);
-    console.log(this.state.password);
   }
 
   onSignUpPress(){

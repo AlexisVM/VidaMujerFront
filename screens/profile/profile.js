@@ -56,7 +56,7 @@ export default class ProfileScreen extends React.Component {
 							<Text style={[styles.h4, { fontWeight: 'bold', textAlign: 'center', color: '#000000' }]}>
 								Nombre
 							</Text>
-							<Text style={[styles.h1, { textAlign: 'center', marginBottom: 30}]}>
+							<Text style={[styles.h1, { marginBottom: 30}]}>
 							{this.state.me?this.state.me.first_name:''}{" "}{this.state.me?this.state.me.last_name:''}
 							</Text>
 							<Text style={[styles.h4, { fontWeight: 'bold', textAlign: 'center', color: '#000000' }]}>

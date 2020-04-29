@@ -140,10 +140,10 @@ export default class ExperiencesScreen extends React.Component {
 										<View style={{width: wp('70%'), alignSelf:'flex-end',
 										flexDirection: 'column', justifyContent: 'center'}}>
 											<Button
-												buttonStyle={[styles.postButton, {justifyContent: "flex-start",}]}
+												buttonStyle={styles.postButton}
 												onPress={this._newpost}
 												title="Comparte algo.."
-												titleStyle={[styles.h1],{ marginLeft: 10,  color: '#828282'}}
+												titleStyle={[styles.h3],{color: '#828282'}}
 											/>
 										</View>
 									</View>
@@ -176,10 +176,8 @@ export default class ExperiencesScreen extends React.Component {
 													}
 													onPress={() => this.opengallery(item.fotos)}
 												/>
-
-
 											</View>
-											<Button buttonStyle={styles.fbLoginButton}
+											<Button buttonStyle={styles.shareButton}
 												onPress={()=>{this._onShare(item.desc);}}
 												title="Compartir"
 												titleStyle={[styles.p, { color: '#FFFFFF' }]} >
