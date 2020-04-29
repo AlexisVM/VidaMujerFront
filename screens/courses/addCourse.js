@@ -174,10 +174,10 @@ export default class AddCourseScreen extends React.Component {
 					isLoading:false,
 					dataSource:response.data,
 				})
-				console.log(response.data) })
+				})
 			.catch((error) => {
-				  console.log(error);
-					console.log(global.host + '/api/paquetes/error');
+				console.log(error);
+				console.log(global.host + '/api/paquetes/error');
 			});
 	};
 

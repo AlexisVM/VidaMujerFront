@@ -1,5 +1,7 @@
 const React = require("react-native");
 const { StyleSheet } = React;
+const VMGray = '#8c8c8c';
+const VMPink = '#E188AE';
 import {Dimensions} from 'react-native';
 
 import {
@@ -10,7 +12,7 @@ import {
 export default StyleSheet.create({
   //B  u  t  t  o  n  s
   loginButton: {
-    backgroundColor: '#E188AE',
+    backgroundColor: VMPink,
     borderRadius: 5,
     height: hp('5%'),
     width: wp('80%'),
@@ -18,8 +20,50 @@ export default StyleSheet.create({
     marginBottom: 10,
     alignSelf: 'center',
   },
+  logoutButton: {
+    backgroundColor: VMPink,
+    borderRadius: 5,
+    height: hp('5%'),
+    width: wp('80%'),
+    marginTop: 10,
+    marginBottom: 10,
+    alignSelf: 'center',
+  },
+  publishButton: {
+    backgroundColor: VMPink,
+    borderRadius: 5,
+    height: hp('5%'),
+    width: wp('80%'),
+    marginTop: 10,
+    marginBottom: 10,
+    alignSelf: 'center',
+  },
+  fotoPagoButton: {
+    backgroundColor: 'transparent',
+    borderColor: VMGray,
+    borderWidth: 2,
+    borderRadius: 5,
+    height: hp('5%'),
+    width: wp('80%'),
+    marginTop: 10,
+    marginBottom: 10,
+    alignSelf: 'center',
+    justifyContent: "flex-start"
+  },
+  fotoExperienciaButton: {
+    backgroundColor: 'transparent',
+    borderColor: '#E188AE',
+    borderWidth: 2,
+    borderRadius: 5,
+    height: hp('5%'),
+    width: wp('80%'),
+    marginTop: 10,
+    marginBottom: 10,
+    alignSelf: 'center',
+    justifyContent: "flex-start",
+  },
   courseButton: {
-    backgroundColor: '#E188AE',
+    backgroundColor: VMPink,
     height: hp('7%'),
     width: wp('96%'),
   },
@@ -31,13 +75,13 @@ export default StyleSheet.create({
     //marginBottom: 10,
     alignSelf: 'center',
     borderWidth: 2,
-    borderColor: '#8c8c8c',
+    borderColor: VMGray
   },
   fbLoginButton: {
     height: hp('5%'),
     width: wp('96%'),
     alignSelf: 'center',
-    backgroundColor: '#E188AE',
+    backgroundColor: VMPink,
   },
   // I  n  p  u  t  s
   formTextInput: {
@@ -137,44 +181,7 @@ export default StyleSheet.create({
     fontSize: hp('3%'),
     color: '#000',
   },
-  aboutNameText:{
-    textAlign: 'center',
-    //fontWeight: 'bold',
-    marginTop: 20,
-    fontSize: hp('2.4%'),
-    color: '#828282',
-  },
-  aboutEmailText:{
-    textAlign: 'center',
-    marginTop: 20,
-    marginBottom: 20,
-    fontSize: hp('2.4%'),
-    color: '#828282',
-  },
-  bodyCardsHeader:{
-    textAlign: 'center',
-    //fontWeight: 'bold',
-    fontSize: hp('2.3%'),
-    color: '#828282',
-  },
-  bodyCardsContent:{
-    textAlign: 'center',
-    //fontWeight: 'bold',
-    fontSize: hp('6%'),
-    color: '#828282',
-  },
-  bodyCardsFooter:{
-    textAlign: 'center',
-    //fontWeight: 'bold',
-    fontSize: hp('2.1%'),
-    color: '#828282',
-  },
-  //C  o  n  t  a  i  n  e  r  s
   containerView: {
-    flex: 1,
-  },
-  screenContainer: {
-    flexDirection: 'column',
     flex: 1,
   },
   lowOpacityContainer:{
@@ -184,10 +191,6 @@ export default StyleSheet.create({
     backgroundColor: '#FFFFFF45',
     borderRadius: 5,
     alignSelf: 'center',
-  },
-  singleTitleContainer:{
-    marginTop: 125,
-    marginBottom: 35,
   },
   inputFormContainer:{
     marginTop: 5,
@@ -222,9 +225,6 @@ export default StyleSheet.create({
     backgroundColor: '#F7F7F7',
     padding: 5,
   },
-  loginBackground:{
-    backgroundColor: '#FFFFFF',
-  },
   logoBackground:{
     marginTop: 70,
     width: 200,
@@ -238,19 +238,10 @@ export default StyleSheet.create({
     width: 150,
     height: 150,
   },
-  backgroundImage:{
-    width: '100%',
-    height: '100%',
-  },
   headerContainer:{
     marginTop: 5,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  profileHeaderContainer:{
-    backgroundColor:'#E188AE',
-    height:90,
-    marginBottom:-80,
   },
   bodyContainer:{
     width: '100%',
@@ -295,85 +286,18 @@ export default StyleSheet.create({
     width: 65,
     height: 65,
   },
-  toggleButtonRow: {
-    margin: 15,
-  },
-  toggleContainer: {
-    alignSelf: 'flex-end',
-  },
   imageContainer:{
     margin: 5,
-    alignItems: 'center',
-  },
-  bodyCardsContainer:{
-    alignItems: 'center',
-    margin: 20,
-  },
-  bodyCards:{
-    width: hp('38%'),
-    height: wp('38%'),
-    marginTop: 20,
-    borderWidth: 4,
-    borderColor: '#B1E001',
-    borderRadius:10,
-    padding: 10,
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  bigBodyCards:{
-    borderWidth: 2,
-    borderColor: '#B1E001',
-    margin: 30,
-    borderRadius:10,
-    padding: 5,
-  },
-  bigBodyCardsAbout:{
-    width: hp('48%'),
-    height: wp('48%'),
-    borderWidth: 2,
-    borderColor: '#B1E001',
-    margin: 30,
-    borderRadius:10,
-    flexDirection: 'column',
-    justifyContent: 'center',
     alignItems: 'center',
   },
   postCards:{
     width: wp('97%'),
     borderWidth: 2,
-    borderColor: '#8c8c8c',
+    borderColor: VMGray,
     marginTop: 30,
     borderRadius:5,
     backgroundColor:'#FFFFFF',
     //padding: 5,
     alignSelf: 'center',
-  },
-  countriesModal: {
-    width: 100,
-    height: 100,
-  },
-  //I  c  o  n  s
-  fbLoginButtonIcon: {
-    /* name: "facebook",
-    type: 'zocial',
-    size: hp('1.9%'), */
-    color: "white"
-  },
-  /*inputIcons:{
-    size: hp('1.9%'),
-  },*/
-  //I  m  a  g  e  s
-  headerImage:{
-    width: 200,
-    height: 200,
-  },
-  mapStyle: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height/2,
-  },
-  //R e p o r t s  s t y l e s
-  profileImage:{
-    width: 150,
-    height: 150,
   },
 });

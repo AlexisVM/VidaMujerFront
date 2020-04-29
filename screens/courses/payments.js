@@ -47,7 +47,6 @@ export default class PaymentsScreen extends React.Component {
 	componentDidMount (){
 		me().then(data=>{
 		 this.setState({isLoading:false,courses:data.compras});
-		 console.log(data.compras);
 	 	});
 	}
 
@@ -74,63 +73,58 @@ export default class PaymentsScreen extends React.Component {
 					}>
 					<Modal transparent={true} visible={this.state.modalVisible}>
 						<View style={{ flex: 1 , backgroundColor: 'rgba(0,0,0,0.7)'}}>
-
 							<View style={{
-												height:30,
-												width:70,
-												alignSelf: 'flex-end',
-												alignItems: 'center',
-												borderWidth: 2,
-												backgroundColor:'#ffffff',
-												borderColor:'transparent',
-												borderRadius:35}}>
-
-												<Icon
-													name='close'
-													type='material'
-													color='black'
-													size={30}
-													onPress={() => {
-													this.setState({modalVisible:false});
-												}}
-												/>
-								</View>
+								height:30,
+								width:70,
+								alignSelf: 'flex-end',
+								alignItems: 'center',
+								borderWidth: 2,
+								backgroundColor:'#ffffff',
+								borderColor:'transparent',
+								borderRadius:35}}>
+								<Icon
+									name='close'
+									type='material'
+									color='black'
+									size={30}
+									onPress={() => {
+										this.setState({modalVisible:false});
+									}}
+								/>
+							</View>
 
 							<View style={{backgroundColor:  '#00000070', color:'#FFFFFF',justifyContent:'center',width:'100%'}}>
-									<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center', color:'#FFFFFF'}]}>
-											Costo: ${this.state.costo}
-									</Text>
-
-									<Button
-	                	buttonStyle={[styles.loginButton, {justifyContent: "flex-start", borderWidth: 2, borderColor: '#8c8c8c', backgroundColor:'transparent'}]}
-	                  onPress={this._pickImage}
-	                  icon = {{
-	                              name: "image",
-	                              type: 'material',
-	                              size: hp('4.2%'),
-	                              color: "white"
-	                            }}
-                    title="Agregar foto"
-                    titleStyle={styles.p}
-                  />
-
-                  {photo &&
-												<View>
-	                      <Image source={{ uri: imageUri }} style={{ width: 200, height: 200, alignSelf: 'center' }} />
-												<TouchableOpacity onPress={this._upload} style={{backgroundColor: '#E188AE'}}>
-													<Text style={[styles.h3, { color:'#FFFFFF', textAlign:'center'}]}>
-														Subir
-													</Text>
-												</TouchableOpacity>
-												</View>
-	                    }
-
+								<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center', color:'#FFFFFF'}]}>
+									Costo: ${this.state.costo}
+								</Text>
+								<Button
+	                				buttonStyle={styles.fotoPagoButton}
+	                  				onPress={this._pickImage}
+	                  				icon = {{
+										name: "image",
+										type: 'material',
+										size: hp('4.2%'),
+										color: "white"
+									}}
+									title="Agregar foto"
+									titleStyle={styles.p}
+                  				/>
+                  				{photo &&
+								<View>
+	                      			<Image source={{ uri: imageUri }} style={{ width: 200, height: 200, alignSelf: 'center' }} />
+									<TouchableOpacity onPress={this._upload} style={{backgroundColor: '#E188AE'}}>
+										<Text style={[styles.h3, { color:'#FFFFFF', textAlign:'center'}]}>
+											Subir
+										</Text>
+									</TouchableOpacity>
 								</View>
+	                    		}
+							</View>
 
 						</View>
 					</Modal>
 					<Modal transparent={true} visible={this.state.modalpago}>
-						<View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)' }}>
+						<View style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.7)', borderColor: '#fffffff', borderTopWidth:30, borderBottomWidth:30}}>
 							<View style={{
 								height: 30,
 								width: 70,
@@ -153,9 +147,9 @@ export default class PaymentsScreen extends React.Component {
 								/>
 							</View>
 
-							<View style={{ backgroundColor: '#000000', color: '#FFFFFF', justifyContent: 'center', width: '100%', marginTop:80, marginBottom:80 }}>
-								<Text style={[styles.h2, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF' }]}>
-									Cuenta Bancomer
+							<View style={{ backgroundColor: '#000000', color: '#FFFFFF', justifyContent: 'center', width: '100%', marginTop:80, marginBottom:80, borderColor:'#FFFFFF', borderWidth: 3}}>
+								<Text style={[styles.h2, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF', marginTop:20}]}>
+									Banco: BBVA
 								</Text>
 								<TouchableOpacity onPress={() => { Clipboard.setString('2997857306'); this.setState({ noCuenta: true }); setTimeout(() => { this.setState({ noCuenta: false }); }, 1000); }}>
 									<Text style={[styles.paymentText]}>
@@ -176,17 +170,17 @@ export default class PaymentsScreen extends React.Component {
 									{this.state.tarjetaCopiado && <Text style={[styles.h4, { textAlign: 'center', color: '#FFFFFF', marginTop: 5 }]}>¡Copiado!</Text>}
 								</TouchableOpacity>
 								<TouchableOpacity onPress={() => { Clipboard.setString('4426684370'); this.setState({ telefono: true }); setTimeout(() => { this.setState({ telefono: false }); }, 1000); }}>
-									<Text style={[styles.h4, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF', marginTop: 10 }]}>
+									<Text style={[styles.h4, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF', marginTop: 10}]}>
 										*Para más información sobre tu pago comunícate vía whatsapp al: +52 442 668 4370
 									</Text>
 									{this.state.telefono && <Text style={[styles.h4, { textAlign: 'center', color: '#FFFFFF', marginTop: 5 }]}>¡Número Copiado!</Text>}
 								</TouchableOpacity>
+								<Text style={{ marginBottom: 10}}></Text>
 							</View>
 
 						</View>
 					</Modal>
-
-					
+	
 					<View style={styles.headerContainer}>
 						<Text style={[styles.h1, {textAlign: 'center'}]}>
 							Pagos
@@ -283,7 +277,7 @@ export default class PaymentsScreen extends React.Component {
      alert('Comprobante enviado');
 		 this.setState({modalVisible:false});
 	 }).catch(function (error) {
-		 //console.log(error);
+		console.log(error);
 	 });
 
  }

@@ -16,12 +16,11 @@ import MyCoursesScreen      from './screens/courses/myCourses.js';
 import AddCourseScreen      from './screens/courses/addCourse.js';
 import PaymentsScreen       from './screens/courses/payments.js';
 import MedicinesScreen      from './screens/medicines/medicines.js';
-import ConfigScreen         from './screens/configuration/config.js';
 import LoginScreen          from './screens/auth/login.js';
 import AuthLoadingScreen    from './screens/auth/authLoading.js';
 import SignUpScreen         from './screens/auth/signup.js';
 import ProfileScreen        from './screens/profile/profile.js';
-
+import AboutMeScreen        from './screens/profile/aboutMe.js';
 
 
 const AuthStack = createStackNavigator({
@@ -167,6 +166,16 @@ const HomeSideNavigation = createDrawerNavigator({
       title: 'Mis cursos',
       drawerIcon: (
         <Icon name='library-books' type='material' color='#000000' />
+      )
+    }
+  },
+  About: {
+    screen: AboutMeScreen,
+    navigationOptions: {
+      drawerLabel: 'Acerca de Mí',
+      title: 'Acerca de Mí',
+      drawerIcon: (
+        <Icon name='user-md' type='font-awesome' color='#000000' />
       )
     }
   },

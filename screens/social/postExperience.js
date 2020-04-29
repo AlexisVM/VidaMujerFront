@@ -61,8 +61,8 @@ export default class PostExperienceScreen extends Component {
 		} else{
     let { photo } = this.state;
     let imageUri = photo ? `data:image/jpg;base64,${photo.base64}` : null;
-    //imageUri && console.log({uri: imageUri.slice(0, 100)});
-	  return(
+
+    return(
       <ScrollView style={styles.background}>
         <KeyboardAvoidingView style={styles.containerView} keyboardVerticalOffset={85} behavior="padding">
           <View style={styles.headerContainer}>
@@ -90,7 +90,7 @@ export default class PostExperienceScreen extends Component {
             <View style={{flexDirection: 'row', paddingTop: Constants.statusBarHeight,} /*Add_photo_button*/}>
                     <View style={{flex:1}}>
                       <Button
-                  buttonStyle={[styles.loginButton, { justifyContent: "flex-start", borderWidth: 2, borderColor: '#E188AE', backgroundColor:'transparent'}]}
+                  buttonStyle={styles.fotoExperienciaButton}
                         onPress={this._pickImage}
                         icon = {{
                                 name: "image",
@@ -110,7 +110,7 @@ export default class PostExperienceScreen extends Component {
             <View style={{flexDirection: 'row'} /*Registration_button*/}>
                     <View style={{flex:1}}>
                       <Button
-                        buttonStyle={styles.loginButton}
+                        buttonStyle={styles.publishButton}
                         onPress={this._post}
                         title="Publicar"
                         titleStyle={[styles.p,{color:'#FFFFFF'}]}
@@ -151,7 +151,6 @@ export default class PostExperienceScreen extends Component {
 
 
         this.setState({ photo:result });
-        //console.log(this.state.photo);
     };
 
   setModalVisible(visible) {
@@ -168,18 +167,17 @@ export default class PostExperienceScreen extends Component {
 	 }).then(function (response) {
         alert('Publicacion enviada');
          let expId = response.data.id;
-         console.log(self.state.photo);
          axios.post(global.host+'/api/fotos/', {
              experiencia: expId,
              uri:self.state.photo.base64
           }).then(function (response) {
             this.props.navigation.navigate('Perfil');
           }).catch(function (error) {
-            //console.log("error en post de fotos" + error);
+            console.log("error en post de fotos" + error);
           });
           this.props.navigation.navigate('Perfil');
 	 }).catch(function (error) {
-		 //console.log("error en post de experiencias" +error);
+	    console.log("error en post de experiencias" +error);
 	 });
 
  }

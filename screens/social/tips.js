@@ -60,8 +60,8 @@ export default class TipsScreen extends React.Component {
 				})
 			})
 		.catch((error) => {
-			  console.log(error);
-				console.log(global.host + '/api/tips/');
+			console.log(error);
+			console.log(global.host + '/api/tips/');
 		});
 	}
 

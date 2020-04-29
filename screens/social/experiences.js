@@ -45,7 +45,7 @@ export default class ExperiencesScreen extends React.Component {
 				})
 			})
 		.catch((error) => {
-			  console.log(error);
+			console.log(error);
 		});
 	}
 	opengallery(images) {
@@ -62,7 +62,6 @@ export default class ExperiencesScreen extends React.Component {
 					isLoading:false,
 					dataSource:responseJson,
 				})
-					//console.log(responseJson.map(a => { a.fotos.map( k => { k.photo_thumbnail})    }))
 			})
 		.catch((error) => {
 			  console.log(error);

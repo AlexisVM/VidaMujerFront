@@ -66,7 +66,7 @@ export default class ProfileScreen extends React.Component {
 								{this.state.me?this.state.me.email:''}
 							</Text>
 							<Button
-				                 buttonStyle={styles.loginButton}
+				                 buttonStyle={styles.logoutButton}
 				                 onPress={this._signOut}
 				                 title="Cerrar sesión"
 				                 titleStyle={[styles.p,{color:'#FFFFFF'}]}
@@ -82,11 +82,6 @@ export default class ProfileScreen extends React.Component {
 	async componentDidMount() {
 	  me().then(data=>{
       this.setState({me:data,isLoading:false});
-			//this.setState({photo: global.host});
-			//let dataStorage = [this.state.photo, ...data.info.photo]
-			//dataStorage = ["'",dataStorage,"'"]
-			//this.setState({photo:dataStorage});
-      //console.log(data)
     });
 
   }

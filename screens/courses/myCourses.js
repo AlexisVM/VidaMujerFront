@@ -42,8 +42,6 @@ export default class MyCoursesScreen extends React.Component {
 	componentDidMount (){
 		me().then(data=>{
 		 this.setState({me:data,isLoading:false,courses:data.compras});
-		//this.state.courses.map(a => {console.log(a.paquete)});
-		 console.log(data.compras)
 	 });
 	}
 
