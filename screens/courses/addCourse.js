@@ -58,94 +58,164 @@ export default class AddCourseScreen extends React.Component {
 				</ScrollView>
 			);
 		} else{
-				return(
-					<ScrollView style={styles.background} refreshControl={
-						<RefreshControl
-							refreshing={this.state.refreshing}
-							onRefresh={this._onRefresh}
-						/>
-					}>
-					<Modal
-								transparent={true}
-								visible={this.state.modalVisible}
-							>
-							<View style={{ flex: 1 }}>
-								<View style={[styles.postCards,{marginTop:70}]}>
-									<View style={{
-													height:30,
-													width:70,
-													alignSelf: 'flex-end',
-													alignItems: 'center',
-													borderWidth: 2,
-													backgroundColor:'#ffffff',
-													borderColor:'transparent',
-													borderRadius:35}}
-												>
-													<Icon
-														name='close'
-														type='material'
-														color='black'
-														size={30}
-														onPress={() => {
-														this.setState({modalVisible:false});
-													}}
-													/>
-									</View>
-									<ImageBackground source={{uri: this.state.course.imagen}} style={{  height: wp('60%'), width: wp('96%')}}>
-									<View style={{backgroundColor:  '#00000070', color:'#FFFFFF',bottom:0,position: 'absolute',width:'100%'}}>
-										<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center', color:'#FFFFFF'}]}>
-											{this.state.course.titulo}
-										</Text>
-										<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center', color:'#FFFFFF'}]}>
-											${this.state.course.costo}
-										</Text>
-										<Text style={[styles.h3, {marginLeft: 10, fontWeight: 'normal', color:'#FFFFFF'}]}>
-											{this.state.course.desc}
-										</Text>
-									</View>
-									</ImageBackground>
-									<Button
-	                  buttonStyle={styles.addCourseButton}
-	                  onPress={this._post}
-	                  title="Contratar"
-	                  titleStyle={[styles.p,{color:'#FFFFFF'}]}
-	                />
-								</View>
-							</View>
-					</Modal>
+				return (
+          <ScrollView
+            style={styles.background}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh}
+              />
+            }
+          >
+            <Modal
+              transparent={true}
+              animationType="slide"
+              visible={this.state.modalVisible}
+            >
+              <View
+                style={[
+                  styles.postCards,
+                  { marginTop: 70, maxHeight: "80%", width: wp("94%") },
+                ]}
+              >
+                <View
+                  style={{
+                    height: 30,
+                    width: 70,
+                    alignSelf: "flex-end",
+                    alignItems: "center",
+                    borderWidth: 2,
+                    backgroundColor: "#ffffff",
+                    borderColor: "transparent",
+                    borderRadius: 35,
+                  }}
+                >
+                  <Icon
+                    name="close"
+                    type="material"
+                    color="black"
+                    size={30}
+                    onPress={() => {
+                      this.setState({ modalVisible: false });
+                    }}
+                  />
+                </View>
+                <ImageBackground
+                  source={{ uri: this.state.course.imagen }}
+                  style={{ height: wp("40%"), width: wp("93%") }}
+                >
+                  <View
+                    style={{
+                      backgroundColor: "#00000070",
+                      color: "#FFFFFF",
+                      bottom: 0,
+                      position: "absolute",
+                      width: "100%",
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.h2,
+                        {
+                          marginLeft: 10,
+                          textAlign: "center",
+                          color: "#FFFFFF",
+                        },
+                      ]}
+                    >
+                      {this.state.course.titulo}
+                    </Text>
+                    <Text
+                      style={[
+                        styles.h2,
+                        {
+                          marginLeft: 10,
+                          textAlign: "center",
+                          color: "#FFFFFF",
+                        },
+                      ]}
+                    >
+                      ${this.state.course.costo}
+                    </Text>
+                  </View>
+                </ImageBackground>
+                <ScrollView style={{ backgroundColor: "#edebeb" }}>
+                  <Text
+                    style={[
+                      styles.h3,
+                      {
+                        marginLeft: 10,
+                        fontWeight: "bold",
+                        color: "#000000",
+                        marginBottom: 10,
+                        marginTop: 10,
+                        marginRight: 10,
+                      },
+                    ]}
+                  >
+                    {this.state.course.desc}
+                  </Text>
+                </ScrollView>
+                <Button
+                  buttonStyle={styles.addCourseButton}
+                  onPress={this._post}
+                  title="Contratar"
+                  titleStyle={[styles.p, { color: "#FFFFFF" }]}
+                />
+              </View>
+            </Modal>
 
-						<View style={styles.headerContainer}>
-							<Text style={styles.h1}>
-								Paquetes Disponibles
-							</Text>
-						</View>
+            <View style={styles.headerContainer}>
+              <Text style={styles.h1}>Paquetes Disponibles</Text>
+            </View>
 
-						<View style={styles.bodyContainer}>
-							<FlatGrid
-								itemDimension={wp('100%')}
-								items={this.state.dataSource?this.state.dataSource:[]}
-								style={styles.gridView}
-								renderItem={({ item, index }) => (
-									<View style={styles.textItemGridContainer}>
-										<View style={[styles.postCards,{width: wp('70%')}]} >
-										<TouchableOpacity onPress={() => {this.openModal(item); ;}}>
-											<ImageBackground source={{uri: item.imagen}} style={{  height:'100%', width:'100%'}}>
-													<View style={{marginTop:100}}>
-													</View>
-													<View style={{backgroundColor:  '#00000070', color:'#FFFFFF'}}>
-														<Text style={[styles.h2, {marginLeft: 10, textAlign: 'center', color:'#FFFFFF'}]}>
-															{item.titulo}
-														</Text>
-													</View>
-											</ImageBackground>
-										</TouchableOpacity>
-										</View>
-									</View>
-								)}
-							/>
-						</View>
-					</ScrollView>
-				);
+            <View style={styles.bodyContainer}>
+              <FlatGrid
+                itemDimension={wp("100%")}
+                items={this.state.dataSource ? this.state.dataSource : []}
+                style={styles.gridView}
+                renderItem={({ item, index }) => (
+                  <View style={styles.textItemGridContainer}>
+                    <View style={[styles.postCards, { width: wp("70%") }]}>
+                      <TouchableOpacity
+                        onPress={() => {
+                          this.openModal(item);
+                        }}
+                      >
+                        <ImageBackground
+                          source={{ uri: item.imagen }}
+                          style={{ height: "100%", width: "100%" }}
+                        >
+                          <View style={{ marginTop: 100 }}></View>
+                          <View
+                            style={{
+                              backgroundColor: "#00000070",
+                              color: "#FFFFFF",
+                            }}
+                          >
+                            <Text
+                              style={[
+                                styles.h2,
+                                {
+                                  marginLeft: 10,
+                                  textAlign: "center",
+                                  color: "#FFFFFF",
+                                },
+                              ]}
+                            >
+                              {item.titulo}
+                            </Text>
+                          </View>
+                        </ImageBackground>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                )}
+              />
+            </View>
+          </ScrollView>
+        );
 		}
 	}
 

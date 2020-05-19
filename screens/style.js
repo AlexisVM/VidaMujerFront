@@ -63,7 +63,7 @@ export default StyleSheet.create({
   addCourseButton: {
     backgroundColor: VMPink,
     height: hp('7%'),
-    width: wp('96%'),
+    width: wp('93%'),
   },
   postButton: {
     backgroundColor: 'transparent',
