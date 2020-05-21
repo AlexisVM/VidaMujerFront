@@ -301,5 +301,7 @@ export default StyleSheet.create({
   imageBackground:{
     height: '100%', 
     width: '100%'
-  }
+  },
+  //Videos
+  
 });
