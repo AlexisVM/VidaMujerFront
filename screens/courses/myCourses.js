@@ -49,33 +49,7 @@ class PlaylistItem {
 	}
 }
 
-const PLAYLIST = [
-	new PlaylistItem(
-		"Comfort Fit - “Sorry”",
-		"https://s3.amazonaws.com/exp-us-standard/audio/playlist-example/Comfort_Fit_-_03_-_Sorry.mp3",
-		true
-	),
-	new PlaylistItem(
-		"Big Buck Bunny",
-		"http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-		true
-	),
-	new PlaylistItem(
-		"Mildred Bailey – “All Of Me”",
-		"https://ia800304.us.archive.org/34/items/PaulWhitemanwithMildredBailey/PaulWhitemanwithMildredBailey-AllofMe.mp3",
-		false
-	),
-	new PlaylistItem(
-		"Popeye - I don't scare",
-		"https://ia800501.us.archive.org/11/items/popeye_i_dont_scare/popeye_i_dont_scare_512kb.mp4",
-		true
-	),
-	new PlaylistItem(
-		"Podington Bear - “Rubber Robot”",
-		"https://s3.amazonaws.com/exp-us-standard/audio/playlist-example/Podington_Bear_-_Rubber_Robot.mp3",
-		false
-	)
-];
+
 
 const ICON_THROUGH_EARPIECE = "speaker-phone";
 const ICON_THROUGH_SPEAKER = "speaker";
@@ -160,6 +134,7 @@ export default class MyCoursesScreen extends React.Component {
 		this.shouldPlayAtEndOfSeek = false;
 		this.playbackInstance = null;
 		this.state = {
+			videosPlaylist : [],
 			isLoaded :true,
 			refreshing: false,
 			dataSource: "",
@@ -193,7 +168,23 @@ export default class MyCoursesScreen extends React.Component {
 
 	componentDidMount (){
 		me().then(data=>{
+
+		 data.compras.map( compra => {
+			 compra.paquete.videos.map(video => 
+				{
+					let newPlay = this.state.videosPlaylist;
+					newPlay.push( new PlaylistItem(
+						video.titulo,
+						video.video,
+						true
+					))
+					this.setState({videosPlaylist:newPlay})
+				}
+				)
+		 }
+		 );
 		 this.setState({me:data,isLoaded:false,courses:data.compras});
+		 //console.log(this.state.videosPlaylist)
 	 });
 		Audio.setAudioModeAsync({
 			allowsRecordingIOS: false,
@@ -214,7 +205,7 @@ export default class MyCoursesScreen extends React.Component {
 			this.playbackInstance = null;
 		}
 
-		const source = { uri: PLAYLIST[this.index].uri };
+		const source = { uri: this.state.videosPlaylist[this.index].uri };
 		const initialStatus = {
 			shouldPlay: playing,
 			rate: this.state.rate,
@@ -226,9 +217,9 @@ export default class MyCoursesScreen extends React.Component {
 			// androidImplementation: 'MediaPlayer',
 		};
 
-		if (PLAYLIST[this.index].isVideo) {
-			console.log(this._onPlaybackStatusUpdate);
-			console.log(this._video);
+		if (this.state.videosPlaylist[this.index].isVideo) {
+			//console.log(this._onPlaybackStatusUpdate);
+			//console.log(this._video);
 			
 			await this._video.loadAsync(source, initialStatus);
 			// this._video.onPlaybackStatusUpdate(this._onPlaybackStatusUpdate);
@@ -263,8 +254,8 @@ export default class MyCoursesScreen extends React.Component {
 			});
 		} else {
 			this.setState({
-				playbackInstanceName: PLAYLIST[this.index].name,
-				showVideo: PLAYLIST[this.index].isVideo,
+				playbackInstanceName: this.state.videosPlaylist[this.index].name,
+				showVideo: this.state.videosPlaylist[this.index].isVideo,
 				isLoading: false
 			});
 		}
@@ -334,7 +325,7 @@ export default class MyCoursesScreen extends React.Component {
 
 	_advanceIndex(forward) {
 		this.index =
-			(this.index + (forward ? 1 : PLAYLIST.length - 1)) % PLAYLIST.length;
+			(this.index + (forward ? 1 : this.state.videosPlaylist.length - 1)) % this.state.videosPlaylist.length;
 	}
 
 	async _updatePlaybackInstanceForIndex(playing) {
@@ -649,165 +640,9 @@ export default class MyCoursesScreen extends React.Component {
 								<Image style={estilos.button} source={ICON_FORWARD_BUTTON.module} />
 							</TouchableHighlight>
 						</View>
-						<View
-							style={[
-								estilos.buttonsContainerBase,
-								estilos.buttonsContainerMiddleRow
-							]}
-						>
-							<View style={estilos.volumeContainer}>
-								<TouchableHighlight
-									underlayColor={BACKGROUND_COLOR}
-									style={estilos.wrapper}
-									onPress={this._onMutePressed}
-								>
-									<Image
-										style={estilos.button}
-										source={
-											this.state.muted
-												? ICON_MUTED_BUTTON.module
-												: ICON_UNMUTED_BUTTON.module
-										}
-									/>
-								</TouchableHighlight>
-								<Slider
-									style={estilos.volumeSlider}
-									trackImage={ICON_TRACK_1.module}
-									thumbImage={ICON_THUMB_2.module}
-									value={1}
-									onValueChange={this._onVolumeSliderValueChange}
-								/>
-							</View>
-							<TouchableHighlight
-								underlayColor={BACKGROUND_COLOR}
-								style={estilos.wrapper}
-								onPress={this._onLoopPressed}
-							>
-								<Image
-									style={estilos.button}
-									source={LOOPING_TYPE_ICONS[this.state.loopingType].module}
-								/>
-							</TouchableHighlight>
-						</View>
-						<View
-							style={[
-								estilos.buttonsContainerBase,
-								estilos.buttonsContainerBottomRow
-							]}
-						>
-							<TouchableHighlight
-								underlayColor={BACKGROUND_COLOR}
-								style={estilos.wrapper}
-								onPress={() => this._trySetRate(1.0, this.state.shouldCorrectPitch)}
-							>
-								<View style={estilos.button}>
-									<Text
-										style={[estilos.text]}
-									>
-										Rate:
-              </Text>
-								</View>
-							</TouchableHighlight>
-							<Slider
-								style={estilos.rateSlider}
-								trackImage={ICON_TRACK_1.module}
-								thumbImage={ICON_THUMB_1.module}
-								value={this.state.rate / RATE_SCALE}
-								onSlidingComplete={this._onRateSliderSlidingComplete}
-							/>
-							<TouchableHighlight
-								underlayColor={BACKGROUND_COLOR}
-								style={estilos.wrapper}
-								onPress={this._onPitchCorrectionPressed}
-							>
-								<View style={estilos.button}>
-									<Text
-										style={[estilos.text]}
-									>
-										PC: {this.state.shouldCorrectPitch ? "yes" : "no"}
-									</Text>
-								</View>
-							</TouchableHighlight>
-							<TouchableHighlight
-								onPress={this._onSpeakerPressed}
-								underlayColor={BACKGROUND_COLOR}
-							>
-								<MaterialIcons
-									name={
-										this.state.throughEarpiece
-											? ICON_THROUGH_EARPIECE
-											: ICON_THROUGH_SPEAKER
-									}
-									size={32}
-									color="black"
-								/>
-							</TouchableHighlight>
-						</View>
+					
+
 						<View />
-						{this.state.showVideo ? (
-							<View>
-								<View
-									style={[
-										estilos.buttonsContainerBase,
-										estilos.buttonsContainerTextRow
-									]}
-								>
-									<View />
-									<TouchableHighlight
-										underlayColor={BACKGROUND_COLOR}
-										style={estilos.wrapper}
-										onPress={this._onPosterPressed}
-									>
-										<View style={estilos.button}>
-											<Text
-												style={[estilos.text]}
-											>
-												Poster: {this.state.poster ? "yes" : "no"}
-											</Text>
-										</View>
-									</TouchableHighlight>
-									<View />
-									<TouchableHighlight
-										underlayColor={BACKGROUND_COLOR}
-										style={estilos.wrapper}
-										onPress={this._onFullscreenPressed}
-									>
-										<View style={estilos.button}>
-											<Text
-												style={[estilos.text]}
-											>
-												Fullscreen
-                  </Text>
-										</View>
-									</TouchableHighlight>
-									<View />
-								</View>
-								<View style={estilos.space} />
-								<View
-									style={[
-										estilos.buttonsContainerBase,
-										estilos.buttonsContainerTextRow
-									]}
-								>
-									<View />
-									<TouchableHighlight
-										underlayColor={BACKGROUND_COLOR}
-										style={estilos.wrapper}
-										onPress={this._onUseNativeControlsPressed}
-									>
-										<View style={estilos.button}>
-											<Text
-												style={[estilos.text]}
-											>
-												Native Controls:{" "}
-												{this.state.useNativeControls ? "yes" : "no"}
-											</Text>
-										</View>
-									</TouchableHighlight>
-									<View />
-								</View>
-							</View>
-						) : null}
 					</View>
 				</ScrollView>
 			);
