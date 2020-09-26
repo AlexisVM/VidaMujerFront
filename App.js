@@ -169,7 +169,7 @@ const HomeSideNavigation = createDrawerNavigator({
       )
     }
   },
-  About: {
+  /*About: {
     screen: AboutMeScreen,
     navigationOptions: {
       drawerLabel: 'Acerca de Mí',
@@ -178,7 +178,7 @@ const HomeSideNavigation = createDrawerNavigator({
         <Icon name='user-md' type='font-awesome' color='#000000' />
       )
     }
-  },
+  },*/
 },{
   contentComponent: CustomMenuComponent,
   navigationOptions: ({ navigation }) => {

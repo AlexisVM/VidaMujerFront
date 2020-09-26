@@ -1,10 +1,10 @@
 import {
 	ScrollView,
 	RefreshControl,
-	ImageBackground,
 	View,
 	Text,
 	TouchableOpacity,
+	ImageBackground,
 	Modal,
 	Dimensions,
 	Image,
@@ -12,6 +12,8 @@ import {
 	StyleSheet,
 	TouchableHighlight,
 } 							from 'react-native';
+import { Button, Icon as Ico } from 'react-native-elements';
+
 import {
         widthPercentageToDP as wp,
         heightPercentageToDP as hp} 							from 'react-native-responsive-screen';
@@ -29,8 +31,6 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import  './../../config';
 import './../utils.js';
-
-const estilos = [styles, styles2];
 
 class Icon {
 	constructor(module, width, height) {
@@ -70,7 +70,7 @@ const ICON_STOP_BUTTON = new Icon(
 	22
 );
 const ICON_FORWARD_BUTTON = new Icon(
-	require("./../../assets/images/forward_button.png"),
+	require("./../../assets/images/next.png"),
 	33,
 	25
 );
@@ -139,6 +139,7 @@ export default class MyCoursesScreen extends React.Component {
 			refreshing: false,
 			dataSource: "",
 			modalVisible: false,
+			course: "null",
 			videoInfo: "",
 			me:null,
 			videos:"",
@@ -181,9 +182,11 @@ export default class MyCoursesScreen extends React.Component {
 					this.setState({videosPlaylist:newPlay})
 				}
 				)
-		 }
+		 }		 
 		 );
 		 this.setState({me:data,isLoaded:false,courses:data.compras});
+			//console.log(this.state.courses);
+
 		 //console.log(this.state.videosPlaylist)
 	 });
 		Audio.setAudioModeAsync({
@@ -196,6 +199,18 @@ export default class MyCoursesScreen extends React.Component {
 			playThroughEarpieceAndroid: false
 		});
 
+	}
+
+	openModal(info) {
+		console.log("info" + info);
+		
+		this.setState({ modalVisible: true, course: info })
+		.then( () => {
+			console.log(this.state.courses);
+			console.log("hola");
+			
+			
+		});
 	}
 
 	async _loadNewPlaybackInstance(playing) {
@@ -287,15 +302,15 @@ export default class MyCoursesScreen extends React.Component {
 	};
 
 	_onLoadStart = () => {
-		console.log(`ON LOAD START`);
+		//console.log(`ON LOAD START`);
 	};
 
 	_onLoad = status => {
-		console.log(`ON LOAD : ${JSON.stringify(status)}`);
+		//console.log(`ON LOAD : ${JSON.stringify(status)}`);
 	};
 
 	_onError = error => {
-		console.log(`ON ERROR : ${error}`);
+		//console.log(`ON ERROR : ${error}`);
 	};
 
 	_onReadyForDisplay = event => {
@@ -318,9 +333,9 @@ export default class MyCoursesScreen extends React.Component {
 	};
 
 	_onFullscreenUpdate = event => {
-		console.log(
-			`FULLSCREEN UPDATE : ${JSON.stringify(event.fullscreenUpdate)}`
-		);
+		//console.log(
+			//`FULLSCREEN UPDATE : ${JSON.stringify(event.fullscreenUpdate)}`
+		//);
 	};
 
 	_advanceIndex(forward) {
@@ -481,7 +496,7 @@ export default class MyCoursesScreen extends React.Component {
 		try {
 			this._video.presentFullscreenPlayer();
 		} catch (error) {
-			console.log(error.toString());
+			//console.log(error.toString());
 		}
 	};
 
@@ -514,135 +529,232 @@ export default class MyCoursesScreen extends React.Component {
 			);
 		} else{
 			return(
-				<ScrollView style={estilos.background}
+				<ScrollView style={styles.background}
 				refreshControl={
 					<RefreshControl
 						refreshing={this.state.refreshing}
 						onRefresh={this._onRefresh}
 					/>
 				}>
+					<Modal
+						transparent={true}
+						animationType="slide"
+						visible={this.state.modalVisible}
+					>
+						<View
+							style={[
+								styles.postCards,
+								{ marginTop: 70, maxHeight: "80%", width: wp("94%") },
+							]}
+						>
+							<View
+								style={{
+									height: 30,
+									width: 70,
+									alignSelf: "flex-end",
+									alignItems: "center",
+									borderWidth: 2,
+									backgroundColor: "#ffffff",
+									borderColor: "transparent",
+									borderRadius: 35,
+								}}
+							>
+								<Ico
+									name="close"
+									type="material"
+									color="black"
+									size={30}
+									onPress={() => {
+										this.setState({ modalVisible: false });
+									}}
+								/>
+							</View>
+							<ImageBackground
+								source={{ uri: this.state.course.imagen }}
+								style={{ height: wp("40%"), width: wp("93%") }}
+							>
+								<View
+									style={{
+										backgroundColor: "#00000070",
+										color: "#FFFFFF",
+										bottom: 0,
+										position: "absolute",
+										width: "100%",
+									}}
+								>
+									<Text
+										style={[
+											styles.h2,
+											{
+												marginLeft: 10,
+												textAlign: "center",
+												color: "#FFFFFF",
+											},
+										]}
+									>
+										{this.state.course.titulo}
+									</Text>
+									<Text
+										style={[
+											styles.h2,
+											{
+												marginLeft: 10,
+												textAlign: "center",
+												color: "#FFFFFF",
+											},
+										]}
+									>
+										${this.state.course.costo}
+									</Text>
+								</View>
+							</ImageBackground>
+							<ScrollView style={{ backgroundColor: "#edebeb" }}>
+								<Text
+									style={[
+										styles.h3,
+										{
+											marginLeft: 10,
+											fontWeight: "bold",
+											color: "#000000",
+											marginBottom: 10,
+											marginTop: 10,
+											marginRight: 10,
+										},
+									]}
+								>
+									{this.state.course.desc}
+								</Text>
+							</ScrollView>
+						</View>
+					</Modal>
 
-					<View style={estilos.headerContainer}>
-						<Text style={estilos.h1}>
+					<View style={styles.headerContainer}>
+						<Text style={styles.h1}>
 							Contratado
 						</Text>
 					</View>
 
-					<View style={estilos.bodyContainer}>
-						<View style={estilos.nameContainer}>
-							<Text style={[estilos.text]}>
-								{this.state.playbackInstanceName}
-							</Text>
-						</View>
-						<View style={estilos.videoContainer}>
-							<Video
-								ref={this._mountVideo}
-								style={[
-									estilos.video,
-									{
-										opacity: this.state.showVideo ? 1.0 : 0.0,
-										width: this.state.videoWidth,
-										height: this.state.videoHeight
-									}
-								]}
-								resizeMode={Video.RESIZE_MODE_CONTAIN}
-								onPlaybackStatusUpdate={this._onPlaybackStatusUpdate}
-								onLoadStart={this._onLoadStart}
-								onLoad={this._onLoad}
-								onError={this._onError}
-								onFullscreenUpdate={this._onFullscreenUpdate}
-								onReadyForDisplay={this._onReadyForDisplay}
-								useNativeControls={this.state.useNativeControls}
-							/>
-						</View>
-						<View
-							style={[
-								estilos.playbackContainer,
-								{
-									opacity: this.state.isLoading ? DISABLED_OPACITY : 1.0
-								}
-							]}
-						>
-							<Slider
-								style={estilos.playbackSlider}
-								trackImage={ICON_TRACK_1.module}
-								thumbImage={ICON_THUMB_1.module}
-								value={this._getSeekSliderPosition()}
-								onValueChange={this._onSeekSliderValueChange}
-								onSlidingComplete={this._onSeekSliderSlidingComplete}
-								disabled={this.state.isLoading}
-							/>
-							<View style={estilos.timestampRow}>
-								<Text
-									style={[
-										estilos.text,
-										estilos.buffering										
-									]}
-								>
-									{this.state.isBuffering ? BUFFERING_STRING : ""}
+					<View style={styles.bodyContainer}>
+						<FlatGrid
+							itemDimension={wp('100%')}
+							items={this.state.courses ? this.state.courses : []}
+							style={styles.gridView}
+							renderItem={({ item, index }) => (
+								<View style={styles.textItemGridContainer}>
+									<TouchableOpacity
+										onPress={() => {
+											this.openModal(item);											
+										}}
+									>
+									<View style={[styles.postCards, { width: wp('92') }]} >
+										<ImageBackground source={require('./../../assets/back.jpg')} style={{ width: '100%' }}>
+											<View style={{ marginTop: 40 }}>
+											</View>
+											<View style={{ backgroundColor: '#00000070', color: '#FFFFFF' }}>
+												<Text style={[styles.h2, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF' }]}>
+													{item.paquete.titulo}
+												</Text>
+											</View>
+											{!item.aprobada &&
+												<View style={{ backgroundColor: '#00000090', color: '#FFFFFF' }}>
+													<Text style={[styles.h4, { marginLeft: 10, textAlign: 'center', color: '#FFFFFF' }]}>
+														Cuando tu pago sea aprobado, podrás ver tus videos.
+													</Text>
+												</View>
+											}
+										</ImageBackground>
+									</View>
+									</TouchableOpacity>
+									{item.aprobada &&
+									<View>
+										<View style={styles2.nameContainer, { marginBottom: 10 }}>
+											<Text style={[styles.h2]}>
+												{this.state.playbackInstanceName}
+											</Text>
+										</View>
+										<View style={[styles2.videoContainer, { marginBottom: 10 }]}>
+											<Video
+												ref={this._mountVideo}
+												style={[
+													styles2.video,
+													{
+														opacity: this.state.showVideo ? 1.0 : 0.0,
+														width: this.state.videoWidth,
+														height: this.state.videoHeight
+													}
+												]}
+												resizeMode={Video.RESIZE_MODE_CONTAIN}
+												onPlaybackStatusUpdate={this._onPlaybackStatusUpdate}
+												onLoadStart={this._onLoadStart}
+												onLoad={this._onLoad}
+												onError={this._onError}
+												onFullscreenUpdate={this._onFullscreenUpdate}
+												onReadyForDisplay={this._onReadyForDisplay}
+												useNativeControls={this.state.useNativeControls}
+											/>
+										</View>
+										{this.state.isBuffering &&
+											<View
+												style={[
+													styles2.playbackContainer,
+													{
+														opacity: this.state.isLoading ? DISABLED_OPACITY : 1.0
+													}
+												]}
+											>
+
+												<View style={styles2.timestampRow}>
+													<Text
+														style={[
+															styles2.text,
+															styles2.buffering
+														]}
+													>
+														cargando...
 								</Text>
-								<Text
-									style={[
-										estilos.text,
-										estilos.timestamp
-									]}
-								>
-									{this._getTimestamp()}
-								</Text>
-							</View>
-						</View>
-						<View
-							style={[
-								estilos.buttonsContainerBase,
-								estilos.buttonsContainerTopRow,
-								{
-									opacity: this.state.isLoading ? DISABLED_OPACITY : 1.0
-								}
-							]}
-						>
+
+												</View>
+											</View>
+										}
+										{/* 
+						<View>
+
 							<TouchableHighlight
 								underlayColor={BACKGROUND_COLOR}
-								style={estilos.wrapper}
+								style={styles2.wrapper}
 								onPress={this._onBackPressed}
 								disabled={this.state.isLoading}
 							>
-								<Image style={estilos.button} source={ICON_BACK_BUTTON.module} />
+								<Image style={styles2.button} source={ICON_BACK_BUTTON.module} />
 							</TouchableHighlight>
+							
+							
 							<TouchableHighlight
 								underlayColor={BACKGROUND_COLOR}
-								style={estilos.wrapper}
-								onPress={this._onPlayPausePressed}
-								disabled={this.state.isLoading}
-							>
-								<Image
-									style={estilos.button}
-									source={
-										this.state.isPlaying
-											? ICON_PAUSE_BUTTON.module
-											: ICON_PLAY_BUTTON.module
-									}
-								/>
-							</TouchableHighlight>
-							<TouchableHighlight
-								underlayColor={BACKGROUND_COLOR}
-								style={estilos.wrapper}
-								onPress={this._onStopPressed}
-								disabled={this.state.isLoading}
-							>
-								<Image style={estilos.button} source={ICON_STOP_BUTTON.module} />
-							</TouchableHighlight>
-							<TouchableHighlight
-								underlayColor={BACKGROUND_COLOR}
-								style={estilos.wrapper}
+								style={styles2.wrapper}
 								onPress={this._onForwardPressed}
 								disabled={this.state.isLoading}
 							>
-								<Image style={estilos.button} source={ICON_FORWARD_BUTTON.module} />
+								<Image style={styles2.button} source={ICON_FORWARD_BUTTON.module} />
 							</TouchableHighlight>
 						</View>
-					
+						*/}
+									<View />
+											{item.paquete.consulta &&
+												<TouchableOpacity onPress={() => { Linking.openURL('whatsapp://send?text=Hola, ya pagué y me gustaría agendar una consulta, mi nombre es ' + this.state.me.first_name + ' ' + this.state.me.last_name + '&phone=5214426684370'); }}>
+													<View style={[styles.postCards, { width: wp('85') }]}>
+														<Text style={styles.h2}>Consulta</Text>
+														<Text style={[styles.h4, { textAlign: 'center' }]}>Contacta a la doctora y agenda tu consulta aqui</Text>
+													</View>
+												</TouchableOpacity>
+											}
+										</View>
+									}
 
-						<View />
+								</View>
+							)}
+						/>
+						
 					</View>
 				</ScrollView>
 			);
@@ -666,6 +778,18 @@ const styles2 = StyleSheet.create({
 		alignSelf: "stretch",
 		backgroundColor: BACKGROUND_COLOR
 	},
+	headerContainer: {
+		marginTop: 5,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	h1: {
+		color: '#828282',
+		fontWeight: 'bold',
+		fontSize: hp('4%'),
+		textAlign: 'center',
+		fontFamily: 'sans-serif-thin'
+	},
 	container: {
 		flex: 1,
 		flexDirection: "column",
@@ -682,10 +806,11 @@ const styles2 = StyleSheet.create({
 		height: FONT_SIZE
 	},
 	videoContainer: {
-		height: VIDEO_CONTAINER_HEIGHT
+		height: VIDEO_CONTAINER_HEIGHT,
+		width: wp('80')
 	},
 	video: {
-		maxWidth: DEVICE_WIDTH
+		maxWidth: wp('92')
 	},
 	playbackContainer: {
 		flex: 1,
@@ -765,5 +890,10 @@ const styles2 = StyleSheet.create({
 		paddingLeft: 20,
 		minWidth: DEVICE_WIDTH,
 		maxWidth: DEVICE_WIDTH
-	}
+	},
+	addCourseButton: {
+		backgroundColor: '#E188AE',
+		height: hp('7%'),
+		width: wp('93%'),
+	},
 });

@@ -138,10 +138,6 @@ export default class SignUpScreen extends Component {
                         secureTextEntry={true} onChangeText={(text) => this.setState({password:text})} value={this.state.password}
                       />
                     </View>
-                    <Text>
-                {this.state.password}
-
-                    </Text>
                   </View>
 
                   <View style={styles.inputFormContainer} /*Password_confirmation*/>
@@ -185,10 +181,16 @@ export default class SignUpScreen extends Component {
   }
 
   verifyInputs = () => {
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     this.setState({formSubmitted:true});
     var passwordIsValid = (this.state.password)?
                                   (this.state.password === this.state.password_confirmation) ? true : false 
                           : false;
+    var passwordIsValidDigits = reg.test(this.state.password) ? true : false;
+
+    if (!passwordIsValidDigits) {
+      alert('Recuerda que la contraseña debe contener al menos 8 caracteres, mayúsculas, minísculas, números y algún caracter especial.');
+    }
     //verify all inputs
     if (this.state.username && this.state.first_name && this.state.last_name && passwordIsValid && this.verifyMail(this.state.email)){
           this.onSignUpPress();

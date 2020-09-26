@@ -163,9 +163,12 @@ export default class PaymentsScreen extends React.Component {
 									</Text>
 									{this.state.clabeCopiado && <Text style={[styles.h4, { textAlign: 'center', color: '#FFFFFF', marginTop: 5 }]}>¡Copiado!</Text>}
 								</TouchableOpacity>
+								<Text style={[styles.paymentText]}>
+									Nombre: Ana Isabel Osorio
+									</Text>
 								<TouchableOpacity onPress={() => { Clipboard.setString('4152313495017480'); this.setState({ tarjetaCopiado: true }); setTimeout(() => { this.setState({ tarjetaCopiado: false }); }, 1000); }}>
 									<Text style={[styles.paymentText]}>
-										Número de Tarjeta: 4152 3134 9501 7480
+										Número de Tarjeta: 4772 9130 5942 5423
 									</Text>
 									{this.state.tarjetaCopiado && <Text style={[styles.h4, { textAlign: 'center', color: '#FFFFFF', marginTop: 5 }]}>¡Copiado!</Text>}
 								</TouchableOpacity>
