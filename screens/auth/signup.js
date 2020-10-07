@@ -181,16 +181,11 @@ export default class SignUpScreen extends Component {
   }
 
   verifyInputs = () => {
-    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     this.setState({formSubmitted:true});
     var passwordIsValid = (this.state.password)?
                                   (this.state.password === this.state.password_confirmation) ? true : false 
                           : false;
-    var passwordIsValidDigits = reg.test(this.state.password) ? true : false;
 
-    if (!passwordIsValidDigits) {
-      alert('Recuerda que la contraseña debe contener al menos 8 caracteres, mayúsculas, minísculas, números y algún caracter especial.');
-    }
     //verify all inputs
     if (this.state.username && this.state.first_name && this.state.last_name && passwordIsValid && this.verifyMail(this.state.email)){
           this.onSignUpPress();
@@ -206,21 +201,23 @@ export default class SignUpScreen extends Component {
   }
 
   onSignUpPress = async () =>  {
-    axios.post(global.host+'/api/users/', {
-        email: this.state.email,
-	      username: this.state.username,
-        password: this.state.password,
-        first_name: this.state.first_name,
-        last_name: this.state.last_name,
-    }).then((response) => {
-      if(response.status==201){
+    console.log('hola');
+    try {
+      const res = await axios.post(global.host+'/api/users/', {
+          email: this.state.email,
+          username: this.state.username,
+          password: this.state.password,
+          first_name: this.state.first_name,
+          last_name: this.state.last_name,
+      });
+      if(res.status==201){
         console.log("exito");
         this._login();
       }
-    }, (error) => {
-      console.log(error.response.data);
-      console.log("error");
-    });
+    } catch (error) {
+      alert('El usuario ya existe, intenta uno diferente');
+      console.log(error);
+    }
   }
 
   _login = async () =>  {
