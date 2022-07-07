@@ -20,7 +20,7 @@
     "expo-network": "~2.1.0",
     "expo-permissions": "~8.1.0",
     "expo-video-player": "^1.5.7",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "native-base": "^2.13.8",
     "react": "16.9.0",
     "react-dom": "16.9.0",
